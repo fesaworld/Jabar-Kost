@@ -17,7 +17,7 @@ class CreateReferralCodesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->softdeletes();
-            $table->string('token');
+            $table->string('token')->unique();
             $table->string('status');
         });
     }
