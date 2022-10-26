@@ -14,49 +14,92 @@
   <div class="menu-inner-shadow"></div>
 
   <ul class="menu-inner py-1">
-    <!-- Dashboard -->
-    <li class="menu-item active">
-      <a href="index.html" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-home-circle"></i>
-        <div data-i18n="Analytics">Dashboard</div>
-      </a>
-    </li>
 
-    <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-collection"></i>
-            <div data-i18n="Basic">Generate Token</div>
+    @if(Auth::user()->getRoleNames()[0] == 'Super Admin')
+
+        <!-- Dashboard -->
+        <li class="menu-item">
+        <a href="index.html" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+            <div data-i18n="Analytics">Dashboard</div>
         </a>
-    </li>
+        </li>
 
-    <!-- Transaksi -->
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Tagih Kost</span></li>
-    <!-- Cards -->
+        <li class="menu-item">
+            <a href="cards-basic.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Generate Token</div>
+            </a>
+        </li>
 
-    <li class="menu-item">
-        <a href="icons-boxicons.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-crown"></i>
-            <div data-i18n="Boxicons">Data Pembayaran</div>
-        </a>
-    </li>
+        <!-- Transaksi -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Tagih Kost</span></li>
+        <!-- Cards -->
 
-    <!-- Kelola Kost -->
-    <li class="menu-header small text-uppercase"><span class="menu-header-text">Kelola Kost</span></li>
-    <!-- Cards -->
+        <li class="menu-item">
+            <a href="icons-boxicons.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-crown"></i>
+                <div data-i18n="Boxicons">Data Pembayaran</div>
+            </a>
+        </li>
 
-    <li class="menu-item">
-        <a href="icons-boxicons.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-crown"></i>
-            <div data-i18n="Boxicons">Data Penyewa</div>
-        </a>
-    </li>
+        <!-- Kelola Kost -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Kelola Kost</span></li>
+        <!-- Cards -->
 
-    <li class="menu-item">
-        <a href="cards-basic.html" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-collection"></i>
-            <div data-i18n="Basic">Data Kamar</div>
-        </a>
-    </li>
+        <li class="menu-item">
+            <a href="icons-boxicons.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-crown"></i>
+                <div data-i18n="Boxicons">Data Penyewa</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="cards-basic.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div data-i18n="Basic">Data Kamar</div>
+            </a>
+        </li>
+
+    @else
+        <!-- Dashboard -->
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
+
+        <!-- Pembayaran Kost -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pembayaran Kost</span></li>
+        <!-- Cards -->
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Tagihan</div>
+            </a>
+        </li>
+
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Riwayat Tagihan</div>
+            </a>
+        </li>
+
+        <!-- Data Diri -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Diri</span></li>
+        <!-- Cards -->
+        <li class="menu-item">
+            <a href="index.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Profil</div>
+            </a>
+        </li>
+
+    @endif
+
+
   </ul>
 </aside>
 <!-- / Menu -->
