@@ -14,7 +14,7 @@
                                 <p class="mb-4">Apa yang akan anda lakukan hari ini ??</p>
 
                                 @role('Super Admin')
-                                <a href="" class="btn btn-sm btn-outline-primary">Generate Token</a>
+                                <a href="{{ url('/token') }}" class="btn btn-sm btn-outline-primary">Generate Token</a>
                                 @endrole
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                         </div>
                                     </div>
                                     <span class="fw-semibold d-block mb-1">User Aktif</span>
-                                    <h3 class="card-title mb-2">10</h3>
+                                    <h3 class="card-title mb-2">{{ $userAktif }}</h3>
                                     <small class="text-success fw-semibold">Orang</small>
                                 </div>
                             </div>
