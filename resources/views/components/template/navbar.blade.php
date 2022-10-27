@@ -33,7 +33,12 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                        @if(Auth::user()->detail->image == null)
+                            <img src="{{ asset('assets/image/defaultProfil.png') }}" class="img-fluid img-thumbnail rounded-circle" />
+                        @else
+                            <img src="{{ asset('assets/image') . '/' . Auth::user()->detail->image }}" class="img-fluid img-thumbnail rounded-circle" />
+                        @endif
+
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">

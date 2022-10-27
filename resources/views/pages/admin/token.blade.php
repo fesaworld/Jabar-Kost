@@ -7,7 +7,7 @@
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">Tables /</span> Basic Tables
+            <a href="/dashboard">Home</a> / List Token
         </h4>
 
         <!-- Hoverable Table rows -->
@@ -18,7 +18,7 @@
                     <span class="tf-icons bx bxs-plus-square "></span>&nbsp; Buat Token Baru
                 </button>
             </h5>
-            <div class="table-responsive text-nowrap">
+            <div class="table-responsive text-nowrap m-3">
                 <table class="table table-hover" id="tokenTable">
                     <thead>
                         <tr>

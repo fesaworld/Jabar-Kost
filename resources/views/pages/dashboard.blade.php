@@ -14,7 +14,7 @@
                                 <p class="mb-4">Apa yang akan anda lakukan hari ini ??</p>
 
                                 @role('Super Admin')
-                                <a href="{{ url('/token') }}" class="btn btn-sm btn-outline-primary">Generate Token</a>
+                                <a class="btn btn-sm btn-outline-primary" onclick="createTokenDashboard()">Generate Token</a>
                                 @endrole
                             </div>
                         </div>
@@ -96,69 +96,13 @@
                                         </div>
                                     </div>
                                     <span class="d-block mb-1">Kamar Tersedia</span>
-                                    <h3 class="card-title text-nowrap mb-2">5</h3>
+                                    <h3 class="card-title text-nowrap mb-2">{{ $kamarTersedia }}</h3>
                                     <small class="text-danger fw-semibold">Kamar</small>
                                 </div>
                             </div>
                         </div>
 
-                        {{--  Tampilan Kamar Terisi  --}}
-                        <div class="col-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
-                                                class="rounded">
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                <a class="dropdown-item" href="#">Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span class="fw-semibold d-block mb-1">Kamar Terisi</span>
-                                    <h3 class="card-title mb-2">8</h3>
-                                    <small class="text-success fw-semibold">Kamar</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                    <div class="row">
-
-                        {{--  Tampilan Jumlah Penghuni  --}}
-                        <div class="col-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title d-flex align-items-start justify-content-between">
-                                        <div class="avatar flex-shrink-0">
-                                            <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded">
-                                        </div>
-                                        <div class="dropdown">
-                                            <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false">
-                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                            </button>
-                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                <a class="dropdown-item" href="#">Detail</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <span class="d-block mb-1">Penghuni Kost</span>
-                                    <h3 class="card-title text-nowrap mb-2">14</h3>
-                                    <small class="text-danger fw-semibold">Orang</small>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{--  Tampilan Jumlah User Aktif  --}}
+                        {{--  Tampilan User Terisi  --}}
                         <div class="col-6 mb-4">
                             <div class="card">
                                 <div class="card-body">
@@ -180,6 +124,62 @@
                                     <span class="fw-semibold d-block mb-1">User Aktif</span>
                                     <h3 class="card-title mb-2">{{ $userAktif }}</h3>
                                     <small class="text-success fw-semibold">Orang</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                    <div class="row">
+
+                        {{--  Tampilan Token Non-Aktif  --}}
+                        <div class="col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded">
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
+                                                <a class="dropdown-item" href="#">Detail</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="d-block mb-1">Token Non-Aktif</span>
+                                    <h3 class="card-title text-nowrap mb-2">{{ $tokenNonAktif }}</h3>
+                                    <small class="text-danger fw-semibold">Token</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{--  Tampilan Token Aktif  --}}
+                        <div class="col-6 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
+                                                class="rounded">
+                                        </div>
+                                        <div class="dropdown">
+                                            <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                                                <a class="dropdown-item" href="#">Detail</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span class="d-block mb-1">Token Aktif</span>
+                                    <h3 class="card-title text-nowrap mb-2">{{ $tokenAktif }}</h3>
+                                    <small class="text-danger fw-semibold">Token</small>
                                 </div>
                             </div>
                         </div>
@@ -273,4 +273,8 @@
             @endrole
         </div>
     </div>
+@push('script')
+    @include('components.scripts.sweetalert')
+    @include($script)
+  @endpush
 @endsection

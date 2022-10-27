@@ -7,7 +7,7 @@
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <h4 class="fw-bold py-3 mb-4">
-            <span class="text-muted fw-light">Data Kamar /</span> List Kamar
+            <a href="/dashboard">Home</a> / List Kamar
         </h4>
 
         <!-- Hoverable Table rows -->
