@@ -9,5 +9,6 @@ Route::group([
 ], function() {
     require_once('includes/dashboard.php');
     require_once('includes/token.php');
+    require_once('includes/room.php');
 });
 

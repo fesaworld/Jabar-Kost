@@ -12,7 +12,7 @@ class TokenController extends Controller
     public function index()
     {
         $data = [
-            'script' => 'components.scripts.token'
+            'script' => 'components.scripts.admin.token'
         ];
 
         return view('pages.admin.token', $data);
@@ -78,7 +78,7 @@ class TokenController extends Controller
     public function destroy($id)
     {
         $token = ReferralCode::where('id', $id)->first()->status;
-        
+
         if($token == 'aktif') {
             return Response::json([
                'msg' => 'Data token aktif tidak bisa dihapus',
