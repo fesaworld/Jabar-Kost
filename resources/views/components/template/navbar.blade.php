@@ -47,7 +47,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                                @if(Auth::user()->detail == null || Auth::user()->detail->image == null)
+                            @if(Auth::user()->detail == null || Auth::user()->detail->image == null)
                                 <img src="{{ asset('assets/image/default/defaultProfil.png') }}" class="img-fluid img-thumbnail rounded-circle" />
                             @else
                                 <img src="{{ asset('assets/image/profil') . '/' . Auth::user()->detail->image }}" class="img-fluid img-thumbnail rounded-circle" />

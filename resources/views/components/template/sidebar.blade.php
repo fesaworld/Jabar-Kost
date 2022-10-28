@@ -64,7 +64,7 @@
     @else
         <!-- Dashboard -->
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="{{ url('/dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
@@ -74,7 +74,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pembayaran Kost</span></li>
         <!-- Cards -->
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="{{ url('/userBill') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Tagihan</div>
             </a>
