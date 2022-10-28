@@ -40,7 +40,7 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Data Pendapatan</h5>
-                                        <span class="badge bg-label-warning rounded-pill">{{ $bulan }}</span>
+                                        <span class="badge bg-label-secondary rounded-pill">{{ $bulan }}</span>
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold">Total</small>
@@ -61,7 +61,7 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Data Tunggakan</h5>
-                                        <span class="badge bg-label-warning rounded-pill">{{ $bulan }}</span>
+                                        <span class="badge bg-label-secondary rounded-pill">{{ $bulan }}</span>
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold">Total</small>
@@ -74,11 +74,11 @@
                 </div>
 
 
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                <div class="col-12 mb-12">
                     <div class="row">
 
                         {{--  Tampilan Kamar Tersedia  --}}
-                        <div class="col-6 mb-4">
+                        <div class="col-3 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
@@ -97,13 +97,13 @@
                                     </div>
                                     <span class="d-block mb-1">Kamar Tersedia</span>
                                     <h3 class="card-title text-nowrap mb-2">{{ $kamarTersedia }}</h3>
-                                    <small class="text-danger fw-semibold">Kamar</small>
+                                    <small class="text-success text-nowrap fw-semibold">Kamar</small>
                                 </div>
                             </div>
                         </div>
 
                         {{--  Tampilan User Terisi  --}}
-                        <div class="col-6 mb-4">
+                        <div class="col-3 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
@@ -123,18 +123,14 @@
                                     </div>
                                     <span class="fw-semibold d-block mb-1">User Aktif</span>
                                     <h3 class="card-title mb-2">{{ $userAktif }}</h3>
-                                    <small class="text-success fw-semibold">Orang</small>
+                                    <small class="text-success text-nowrap fw-semibold">Orang</small>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
-                    <div class="row">
 
                         {{--  Tampilan Token Non-Aktif  --}}
-                        <div class="col-6 mb-4">
+                        <div class="col-3 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
@@ -153,13 +149,13 @@
                                     </div>
                                     <span class="d-block mb-1">Token Non-Aktif</span>
                                     <h3 class="card-title text-nowrap mb-2">{{ $tokenNonAktif }}</h3>
-                                    <small class="text-danger fw-semibold">Token</small>
+                                    <small class="text-success text-nowrap fw-semibold">Token</small>
                                 </div>
                             </div>
                         </div>
 
                         {{--  Tampilan Token Aktif  --}}
-                        <div class="col-6 mb-4">
+                        <div class="col-3 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">
@@ -179,7 +175,7 @@
                                     </div>
                                     <span class="d-block mb-1">Token Aktif</span>
                                     <h3 class="card-title text-nowrap mb-2">{{ $tokenAktif }}</h3>
-                                    <small class="text-danger fw-semibold">Token</small>
+                                    <small class="text-success text-nowrap fw-semibold">Token</small>
                                 </div>
                             </div>
                         </div>
@@ -199,11 +195,11 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Harga Sewa</h5>
-                                        <span class="badge bg-label-warning rounded-pill">Premium - Juni</span>
+                                        <span class="badge bg-label-secondary rounded-pill">{{ $namaKamar }}</span>
                                     </div>
                                     <div class="mt-sm-auto">
 
-                                        <h3 class="mb-0">Rp. 1.500.000</h3>
+                                        <h3 class="mb-0">Rp. {{ $hargaSewa }}</h3>
                                         <small class="text-success text-nowrap fw-semibold">/bulan</small>
                                     </div>
                                 </div>
@@ -221,11 +217,11 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Data Tagihan</h5>
-                                        <span class="badge bg-label-warning rounded-pill">Juli</span>
+                                        <span class="badge bg-label-secondary rounded-pill">{{ $namaKamar }} - {{ $bulan }}</span>
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold">Total</small>
-                                        <h3 class="mb-0">Rp. 1.500.000</h3>
+                                        <h3 class="mb-0">Rp. {{ $dataTagihan }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -233,7 +229,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2">
+                <div class="col-12 mb-12">
                     <div class="row">
 
                         {{--  Tampilan Sisa Tempo  --}}
@@ -246,8 +242,8 @@
                                         </div>
                                     </div>
                                     <span class="d-block mb-1">Sisa Tempo</span>
-                                    <h3 class="card-title text-nowrap mb-2">30</h3>
-                                    <small class="text-danger fw-semibold">Hari</small>
+                                    <h3 class="card-title text-nowrap mb-2">{{ $sisaTempo }}</h3>
+                                    <small class="text-success text-nowrap fw-semibold">*dari sekarang</small>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +259,7 @@
                                         </div>
                                     </div>
                                     <span class="fw-semibold d-block mb-1">Lama Sewa</span>
-                                    <h3 class="card-title mb-2">2</h3>
+                                    <h3 class="card-title mb-2">{{ $lamaSewa }}</h3>
                                     <small class="text-success fw-semibold">Bulan</small>
                                 </div>
                             </div>

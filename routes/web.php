@@ -11,5 +11,7 @@ Route::group([
     require_once('includes/admin/token.php');
     require_once('includes/admin/room.php');
     require_once('includes/admin/invoice.php');
+
+    require_once('includes/user/userBill.php');
 });
 
