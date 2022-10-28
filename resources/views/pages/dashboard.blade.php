@@ -31,7 +31,7 @@
 
             @role('Super Admin')
 
-                {{--  Tampilan Data Pemasukkan  --}}
+                {{--  Tampilan Data Pendapatan  --}}
                 <div class="col-6 mb-4">
                     <div class="card">
                         <div class="card-body">
@@ -39,12 +39,12 @@
                                 style="position: relative;">
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
-                                        <h5 class="text-nowrap mb-2">Data Pemasukkan</h5>
-                                        <span class="badge bg-label-warning rounded-pill">Juni</span>
+                                        <h5 class="text-nowrap mb-2">Data Pendapatan</h5>
+                                        <span class="badge bg-label-warning rounded-pill">{{ $bulan }}</span>
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold">Total</small>
-                                        <h3 class="mb-0">Rp. 5.000.000</h3>
+                                        <h3 class="mb-0">Rp. {{ $pemasukan }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -61,11 +61,11 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Data Tunggakan</h5>
-                                        <span class="badge bg-label-warning rounded-pill">Juni</span>
+                                        <span class="badge bg-label-warning rounded-pill">{{ $bulan }}</span>
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold">Total</small>
-                                        <h3 class="mb-0">Rp. 1.500.000</h3>
+                                        <h3 class="mb-0">Rp. {{ $tunggakan }}</h3>
                                     </div>
                                 </div>
                             </div>
