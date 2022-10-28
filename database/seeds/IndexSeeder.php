@@ -47,7 +47,7 @@ class IndexSeeder extends Seeder
         $code = ReferralCode::insertGetId([
             'created_at' => date('Y-m-d H:i:s'),
             'token' => '11111',
-            'status' => 'aktif',
+            'status' => 'Aktif',
         ]);
 
         UserDetail::create([
@@ -72,7 +72,7 @@ class IndexSeeder extends Seeder
 
         $code = ReferralCode::insertGetId([
             'token' => '12345',
-            'status' => 'aktif',
+            'status' => 'Aktif',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 

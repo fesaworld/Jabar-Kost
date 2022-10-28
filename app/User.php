@@ -42,4 +42,8 @@ class User extends Authenticatable
     public function detail() {
         return $this->belongsTo(UserDetail::class, 'id');
     }
+
+    public function invoice() {
+        return $this->belongsTo(Invoice::class, 'id');
+    }
 }

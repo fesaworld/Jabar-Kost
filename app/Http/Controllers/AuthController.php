@@ -80,9 +80,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-
-
-
         $rules = [
             'username'     => 'required',
             'email'     => 'required|email|unique:users',
@@ -112,7 +109,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
-        $token = ReferralCode::where('token', $request->token)->where('status', 'non-aktif')->first();
+        $token = ReferralCode::where('token', $request->token)->where('status', 'Non-Aktif')->first();
 
         if($token)
         {
@@ -128,7 +125,7 @@ class AuthController extends Controller
 
             //buat update token
             $token -> update([
-                'status' => 'aktif'
+                'status' => 'Aktif'
             ]);
 
             // buat auth login

@@ -1,12 +1,12 @@
 <script>
-    let room_id;
+    let inv_id;
 
-    const createRoom = () => {
-        $('#createRoomForm').trigger('reset');
-        $('#createRoomModal').modal('show');
+    const createInv = () => {
+        $('#createInvForm').trigger('reset');
+        $('#createInvModal').modal('show');
     }
 
-    const deleteRoom = (id) => {
+    const deleteInv = (id) => {
         Swal.fire({
             title: 'Apa anda yakin untuk menghapus?',
             icon: 'warning',
@@ -28,33 +28,86 @@
 
                 $.ajax({
                     type: "delete",
-                    url: `/room/${id}`,
+                    url: `/invoice/${id}`,
                     dataType: "json",
-                    success: function (response) {
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
                         Swal.close();
 
-                        if(response.status) {
+                        if(data.status) {
                             Swal.fire(
                                 'Success!',
-                                response.msg,
+                                data.msg,
                                 'success'
                             )
 
-                            $('#roomTable').DataTable().ajax.reload();
+                            $('#invTable').DataTable().ajax.reload();
                         } else {
                             Swal.fire(
                                 'Error!',
-                                response.msg,
+                                data.msg,
                                 'warning'
                             )
                         }
                     }
-                });
+                })
             }
         });
     }
 
-    const editRoom = (id) => {
+    const statusInv = (id) => {
+        Swal.fire({
+            title: 'Apa anda yakin untuk merubah status?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            cancelButtonText: 'Tidak'
+        }).then((result) => {
+            Swal.close();
+
+            if(result.value) {
+                Swal.fire({
+                    title: 'Mohon tunggu',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    willOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+
+                $.ajax({
+                    type: "post",
+                    url: `/invoiceStatus/${id}`,
+                    dataType: "json",
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    success: function(data) {
+                        Swal.close();
+
+                        if(data.status) {
+                            Swal.fire(
+                                'Success!',
+                                data.msg,
+                                'success'
+                            )
+
+                            $('#invTable').DataTable().ajax.reload();
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                data.msg,
+                                'warning'
+                            )
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+    const editInv = (id) => {
         Swal.fire({
             title: 'Mohon tunggu',
             showConfirmButton: false,
@@ -64,19 +117,20 @@
             }
         });
 
-        room_id = id;
+        inv_id = id;
 
         $.ajax({
             type: "get",
-            url: `/room/${room_id}`,
+            url: `/invoice/${inv_id}`,
             dataType: "json",
             success: function (response) {
-                $('#roomNameEdit').val(response.name);
-                $('#roomPriceEdit').val(response.price);
-                $('#roomStockEdit').val(response.stok);
-                $('#roomDetailEdit').val(response.detail);
+                $('#invEditName').val(response.name);
+                $('#invEditRoom').val(response.room_id);
+                $('#invEditStart').val(response.start);
+                $('#invEditEnd').val(response.end);
+                $('#invEditDisc').val(response.discount);
                 Swal.close();
-                $('#editRoomModal').modal('show');
+                $('#editInvModal').modal('show');
             }
         });
     }
@@ -88,7 +142,7 @@
             }
         });
 
-        $('#roomTable').DataTable({
+        $('#invTable').DataTable({
             order: [],
             lengthMenu: [[10, 25, 50, 100, -1], ['10', '25', '50', '100', 'Semua']],
             filter: true,
@@ -96,35 +150,29 @@
             responsive: true,
             serverSide: true,
             ajax: {
-                url: '/room/lihatRoom'
+                url: '/invoice/lihatInvoice'
             },
             "columns":
             [
                 { data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'name', name:'member.name'},
+                { data: 'user_id', name:'to_user.name'},
+                { data: 'room_id', name:'to_room.name'},
+                { data: 'start', name:'member.name'},
+                { data: 'end', name:'member.name'},
+                { data: 'discount', name:'member.name'},
                 { data: 'price', name:'member.price'},
-                { data: 'stok', name:'member.stok'},
-                { data: 'detail', name:'member.detail'},
+                { data: 'trf_image', name:'member.stok'},
+                { data: 'status', name:'member.detail'},
                 { data: 'action', orderable: false, searchable: false},
             ]
         });
 
-        $('.roomPrice').keyup(function(event) {
-            if(event.which >= 37 && event.which <= 40) return;
-
-            $(this).val(function(index, value) {
-                return value
-                .replace(/\D/g, "")
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            });
-        });
-
-        $('#createRoomSubmit').click(function (e) {
+        $('#createInvSubmit').click(function (e) {
             e.preventDefault();
 
-            var formData = $('#createRoomForm').serialize();
+            var formData = $('#createInvForm').serialize();
 
-            $('#createRoomModal').modal('hide');
+            $('#createInvModal').modal('hide');
 
             Swal.fire({
                 title: 'Mohon tunggu',
@@ -137,7 +185,7 @@
 
             $.ajax({
                 type: "post",
-                url: "/room",
+                url: "/invoice",
                 data: formData,
                 dataType: "json",
                 cache: false,
@@ -152,7 +200,7 @@
                             'success'
                             )
 
-                            $('#roomTable').DataTable().ajax.reload();
+                            $('#invTable').DataTable().ajax.reload();
                         } else {
                             Swal.fire(
                                 'Error!',
@@ -160,7 +208,7 @@
                                 'warning'
                                 ).then(() => {
 
-                                    $('#createRoomModal').modal('show');
+                                    $('#createInvModal').modal('show');
                                 })
 
                     }
@@ -168,12 +216,12 @@
             })
         });
 
-        $('#editRoomSubmit').click(function (e) {
+        $('#editInvSubmit').click(function (e) {
             e.preventDefault();
 
-            var formData = $('#editRoomForm').serialize();
+            var formData = $('#editInvForm').serialize();
 
-            $('#editRoomModal').modal('hide');
+            $('#editInvModal').modal('hide');
 
             Swal.fire({
                 title: 'Mohon tunggu',
@@ -186,7 +234,7 @@
 
             $.ajax({
                 type: "post",
-                url: `/room/${room_id}`,
+                url: `/invoice/${inv_id}`,
                 data: formData,
                 dataType: "json",
                 cache: false,
@@ -201,9 +249,9 @@
                             'success'
                         )
 
-                        member_id = null;
+                        inv_id = null;
 
-                        $('#roomTable').DataTable().ajax.reload();
+                        $('#invTable').DataTable().ajax.reload();
                     } else {
                         Swal.fire(
                             'Error!',
@@ -217,6 +265,6 @@
                 }
             })
         });
-
     });
+
 </script>

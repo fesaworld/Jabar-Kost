@@ -56,7 +56,7 @@ class TokenController extends Controller
             ReferralCode::create([
                 'created_at' => date('Y-m-d H:i:s'),
                 'token' => $random,
-                'status' => 'non-aktif',
+                'status' => 'Non-Aktif',
             ]);
 
             $json = [
@@ -79,7 +79,7 @@ class TokenController extends Controller
     {
         $token = ReferralCode::where('id', $id)->first()->status;
 
-        if($token == 'aktif') {
+        if($token == 'Aktif') {
             return Response::json([
                'msg' => 'Data token aktif tidak bisa dihapus',
                'status' => false

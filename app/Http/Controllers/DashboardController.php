@@ -20,9 +20,9 @@ class DashboardController extends Controller
 
         $kamarTersedia = Room::count();
 
-        $tokenNonAktif = ReferralCode::where('status', 'non-aktif')->count();
+        $tokenNonAktif = ReferralCode::where('status', 'Non-Aktif')->count();
 
-        $tokenAktif = ReferralCode::where('status', 'aktif')->count();
+        $tokenAktif = ReferralCode::where('status', 'Aktif')->count();
 
         $data = [
             'tokenAktif' => $tokenAktif,

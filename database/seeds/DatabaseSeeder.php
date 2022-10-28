@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             IndexSeeder::class,
             RoomSeeder::class,
+            InvoiceSeeder::class,
         ]);
     }
 }

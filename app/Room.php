@@ -11,4 +11,8 @@ class Room extends Model
     protected $fillable = [
         'name', 'price', 'stok', 'detail', 'created_at', 'updated_at'
     ];
+
+    public function invoiceRoom() {
+        return $this->belongsTo(Invoice::class, 'id');
+    }
 }
