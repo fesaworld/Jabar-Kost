@@ -19,7 +19,7 @@ class InvoiceSeeder extends Seeder
             'end' => date('Y-m-d'),
             'discount' => '0',
             'total_price' => '500000',
-            'trf_image' => 'trfDefault.jpg',
+            'trf_image' => 'transfer.jpg',
             'status' => 'Aktif',
             'created_at' => date('Y-m-d H:i:s'),
         ]);

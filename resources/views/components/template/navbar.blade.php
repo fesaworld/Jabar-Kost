@@ -34,9 +34,9 @@
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                         @if(Auth::user()->detail == null || Auth::user()->detail->image == null)
-                            <img src="{{ asset('assets/image/defaultProfil.png') }}" class="img-fluid img-thumbnail rounded-circle" />
+                            <img src="{{ asset('assets/image/default/defaultProfil.png') }}" class="img-fluid img-thumbnail rounded-circle" />
                         @else
-                            <img src="{{ asset('assets/image') . '/' . Auth::user()->detail->image }}" class="img-fluid img-thumbnail rounded-circle" />
+                            <img src="{{ asset('assets/image/profil') . '/' . Auth::user()->detail->image }}" class="img-fluid img-thumbnail rounded-circle" />
                         @endif
 
                     </div>
@@ -48,9 +48,9 @@
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
                                 @if(Auth::user()->detail == null || Auth::user()->detail->image == null)
-                                <img src="{{ asset('assets/image/defaultProfil.png') }}" class="img-fluid img-thumbnail rounded-circle" />
+                                <img src="{{ asset('assets/image/default/defaultProfil.png') }}" class="img-fluid img-thumbnail rounded-circle" />
                             @else
-                                <img src="{{ asset('assets/image') . '/' . Auth::user()->detail->image }}" class="img-fluid img-thumbnail rounded-circle" />
+                                <img src="{{ asset('assets/image/profil') . '/' . Auth::user()->detail->image }}" class="img-fluid img-thumbnail rounded-circle" />
                             @endif
                             </div>
                           </div>

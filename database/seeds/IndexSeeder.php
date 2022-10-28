@@ -81,7 +81,7 @@ class IndexSeeder extends Seeder
             'ref_id' => $code,
             'address' => 'Indramayu',
             'phone' => '12345678',
-            'image' => null,
+            'image' => 'profil.png',
             'gender' => 'Laki-laki',
             'card_id' => null,
             'created_at' => date('Y-m-d H:i:s')
