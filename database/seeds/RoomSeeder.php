@@ -15,7 +15,7 @@ class RoomSeeder extends Seeder
         Room::create([
             'name' => 'Kamar Premium',
             'price' => '500000',
-            'stok' => '2',
+            'stok' => '1',
             'detail' => 'Kamar ini tipe terendah',
             'created_at' => date('Y-m-d H:i:s')
         ]);

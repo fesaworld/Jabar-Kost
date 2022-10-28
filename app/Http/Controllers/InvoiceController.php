@@ -257,16 +257,25 @@ class InvoiceController extends Controller
     {
         $data = Invoice::where('id', $id)->first()->status;
 
+        $dataStok = Room::where('id', $id)->first();
+
+
         if($data == 'Aktif'){
             $data = 'Non-Aktif';
+            $dataStok = $dataStok->stok + 1;
         } elseif ($data == 'Non-Aktif') {
             $data = 'Aktif';
+            $dataStok = $dataStok->stok - 1;
         }
 
         try{
-
             Invoice::whereId($id)->update([
                 'status' => $data,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+
+            Room::whereId($id)->update([
+                'stok' => $dataStok,
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
 
@@ -289,8 +298,16 @@ class InvoiceController extends Controller
 
     public function destroy($id)
     {
+        $data = Room::where('id', $id)->first();
+        $data = $data->stok + 1;
+
         try{
             Invoice::where('id',$id)->Delete();
+
+            Room::whereId($id)->update([
+                'stok' => $data,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
 
             $json = [
                 'msg' => 'Data penyewa berhasil dihapus',
