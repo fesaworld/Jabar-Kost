@@ -91,7 +91,7 @@
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Diri</span></li>
         <!-- Cards -->
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="{{ url('/userProfile') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Profil</div>
             </a>

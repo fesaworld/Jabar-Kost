@@ -1,9 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
-@push('style')
-@include('components.styles.datatables')
-@endpush
+    @push('style')
+        @include('components.styles.datatables')
+        @include('components.styles.dropify')
+    @endpush
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <h5 class="fw-bold py-3 mb-4">
@@ -61,32 +62,11 @@
                     </div>
 
                     <div class="mb-3 ">
-                        <label class="form-label" for="trfUser">Bukti Transfer</label>
-                        <div class="card-body">
-                            <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                    @if ($data->trf_image == null)
-                                        <img src="{{ asset('assets/image/default/notFound.png') }}" alt="user-avatar"
-                                            class="d-block rounded" height="100" width="100" id="trfUser" name="trfUser">
-                                    @else
-                                        <img src="{{ asset('assets/image/buktiTrf') . '/' . $data->trf_image }}" alt="user-avatar"
-                                                class="d-block rounded" height="100" width="100" id="trfUser" name="trfUser">
-                                    @endif
-                                    <div class="button-wrapper">
-                                        <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                            <span class="d-none d-sm-block">Upload new photo</span>
-                                            <i class="bx bx-upload d-block d-sm-none"></i>
-                                            <input type="file" name="trfUser" id="upload" class="account-file-input" hidden=""
-                                                accept="image/png, image/jpeg">
-                                        </label>
-                                        <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                            <i class="bx bx-reset d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Reset</span>
-                                        </button>
+                        <label class="form-label" for="imageTrf">Bukti Transfer</label>
+                        {{--  {{ $segment1 == 'dashboard' ? 'active' : null }}  --}}
+                        {{--  asset('assets/image/default/notFound.png')   --}}
+                        <input type="file" class="form-control" id="imageTrf" name="imageTrf" data-default-file="{{ $data->trf_image == null ? asset('assets/image/default/notFound.png') : asset('assets/image/buktiTrf') . '/' . $data->trf_image}}">
 
-                                        <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                                    </div>
-                            </div>
-                        </div>
                     </div>
 
                     @if ($data->status == 'Non-Aktif')

@@ -123,6 +123,18 @@ class AuthController extends Controller
             $user = User::create($data);
             $user->syncRoles('User');
 
+            UserDetail::create([
+                'user_id' => $user->id,
+                'ref_id' => $token->id,
+                'address' => null,
+                'phone' => null,
+                'image' => null,
+                'gender' => null,
+                'card_id' => null,
+                'status' => 'Non-Aktif',
+                'created_at' => date('Y-m-d H:i:s')
+            ]);
+
             //buat update token
             $token -> update([
                 'status' => 'Aktif'

@@ -18,11 +18,12 @@ class CreateUserDetailsTable extends Migration
             $table->timestamps();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('ref_id');
-            $table->text('address');
-            $table->string('phone');
+            $table->text('address')->nullable();
+            $table->string('phone')->nullable();
             $table->text('image')->nullable();
-            $table->string('gender');
+            $table->string('gender')->nullable();
             $table->text('card_id')->nullable();
+            $table->string('status');
 
             $table->foreign('user_id')
                 ->references('id')

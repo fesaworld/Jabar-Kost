@@ -29,46 +29,18 @@ class UserBillController extends Controller
         return view('pages.user.userBill', $data);
     }
 
-    public function show($id)
-    {
-        dd($id);
-
-        // if(is_numeric($id))
-        // {
-        //     $data = ReferralCode::where('id', $id)->first();
-
-        //     return Response::json($data);
-        // }
-
-        // $data = ReferralCode::orderBy('id', 'desc')->get();
-
-        // return DataTables::of($data)
-        //     ->addColumn(
-        //         'action',
-        //         function($row) {
-        //             $data = [
-        //                 'id' => $row->id
-        //             ];
-
-        //             return view('components.buttons.token', $data);
-        //         }
-        //     )
-        //     ->addIndexColumn()
-        //     ->make(true);
-    }
-
     public function update(Request $request, $id)
     {
         //dd($request->all());
 
-        if(!$request->file('trfUser'))
+        if(!$request->file('imageTrf'))
         {
             $json = [
                 'msg'       => 'Mohon masukkan bukti transfer',
                 'status'    => false
             ];
         } else {
-            $post_image = $request->file('trfUser');
+            $post_image = $request->file('imageTrf');
             $extension  = $post_image->getClientOriginalExtension();
 
             $featuredImageName  = date('YmdHis').'.'.$extension;

@@ -58,6 +58,7 @@ class IndexSeeder extends Seeder
             'image' => null,
             'gender' => 'Laki-laki',
             'card_id' => null,
+            'status' => 'Aktif',
             'created_at' => date('Y-m-d H:i:s')
         ]);
 
@@ -84,6 +85,7 @@ class IndexSeeder extends Seeder
             'image' => 'profil.png',
             'gender' => 'Laki-laki',
             'card_id' => null,
+            'status' => 'Non-Aktif',
             'created_at' => date('Y-m-d H:i:s')
         ]);
     }

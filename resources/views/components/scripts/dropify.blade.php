@@ -3,5 +3,6 @@
 <script>
     $(function () {
         $('#imageTrf').dropify();
+        $('#userCard').dropify();
     });
 </script>
