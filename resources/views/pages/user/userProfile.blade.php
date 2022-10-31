@@ -1,10 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-@push('style')
-@include('components.styles.datatables')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.css" integrity="sha512-In/+MILhf6UMDJU4ZhDL0R0fEpsp4D3Le23m6+ujDWXwl3whwpucJG1PEmI3B07nyJx+875ccs+yX2CqQJUxUw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-@endpush
+    @push('style')
+        @include('components.styles.dropify')
+    @endpush
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
         <h5 class="fw-bold py-3 mb-4">
@@ -77,7 +76,7 @@
                     <div class="row">
                         <div class="col mb-3">
                             <label for="userPhone" class="form-label">No. Telepon</label>
-                            <input type="text" class="form-control" id="userPhone" name="userPhone" placeholder="Masukkan nomor telepon anda" value="{{ $data->phone }}" readonly>
+                            <input type="text" class="form-control phone" id="userPhone" name="userPhone" placeholder="Masukkan nomor telepon anda" value="{{ $data->phone }}" readonly>
                         </div>
                         <div class="col mb-3">
                             <label for="userGender" class="form-label">Jenis Kelamin</label>
@@ -103,11 +102,12 @@
                         <input type="file" class="form-control" id="userCard" name="userCard" data-default-file="{{ $data->card_id == null ? asset('assets/image/default/notFound.png') : asset('assets/image/idCard') . '/' . $data->card_id}}">
 
                     </div>
-
-                    <div class="float-end">
-                        <button type="button" class="btn btn-primary" id="btnUserSubmit" name="btnUserSubmit" disabled>Simpan Profil</button>
-                        <button type="button" class="btn btn-danger" id="btnUserEdit" onclick="editProfil({{ $data->id }})">Edit Profil</button>
-                    </div>
+                    @if ($data->status == 'Non-Aktif')
+                        <div class="float-end">
+                            <button type="button" class="btn btn-primary" id="btnUserSubmit" name="btnUserSubmit" disabled>Simpan Profil</button>
+                            <button type="button" class="btn btn-danger" id="btnUserEdit" onclick="editProfil({{ $data->id }})">Edit Profil</button>
+                        </div>
+                    @endif
                 </form>
             </div>
         </div>

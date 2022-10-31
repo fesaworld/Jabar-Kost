@@ -6,6 +6,7 @@ use App\User;
 use App\Room;
 use App\Invoice;
 use App\ReferralCode;
+use App\UserDetail;
 use DateTime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,6 +42,7 @@ class DashboardController extends Controller
 
             $data = [
                 // Buat Dashboard ADMINISTRATOR
+
                 'bulan'         => $bulan,
                 'tunggakan'     => $tunggakan,
                 'pemasukan'     => $pemasukan,
@@ -58,6 +60,8 @@ class DashboardController extends Controller
 
             $dataInv = Invoice::where('user_id', Auth::user()->id)->first();
 
+            $dataDetail = UserDetail::with('detailToUser')->where('user_id', Auth::user()->id)->first();
+
             if ($dataInv->status == 'Aktif') {$dataTagihan = 0;
             }else{$dataTagihan = number_format($dataInv->total_price);}
 
@@ -72,17 +76,22 @@ class DashboardController extends Controller
             $hargaSewa = number_format($dataInv->toRoom->price);
             $namaKamar = $dataInv->toRoom->name;
             $sisaTempo = Carbon::createFromTimeStamp(strtotime($dataInv->end))->diffForHumans();
-            ;
             $lamaSewa = $totalBulan;
+            $tempoSewa = date('d F Y', strtotime($dataInv->end));
+            $namaUser = Auth::user()->name;
+            $aktifUser = $dataDetail->status;
+
 
             $data = [
                 // Buat Dashboard User
-                'sisaTempo' => $sisaTempo,
-                'lamaSewa'  => $lamaSewa,
-                'bulan'     => $bulan,
-                'dataTagihan' => $dataTagihan,
-                'hargaSewa' => $hargaSewa,
-                'namaKamar' => $namaKamar,
+                'aktifUser'     => $aktifUser,
+                'namaUser'      => $namaUser,
+                'tempoSewa'     => $tempoSewa,
+                'sisaTempo'     => $sisaTempo,
+                'lamaSewa'      => $lamaSewa,
+                'dataTagihan'   => $dataTagihan,
+                'hargaSewa'     => $hargaSewa,
+                'namaKamar'     => $namaKamar,
 
                 'script'        => 'components.scripts.dashboard'
             ];

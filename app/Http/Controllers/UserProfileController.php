@@ -63,7 +63,6 @@ class UserProfileController extends Controller
                         unlink($pleaseRemove);
                     }
                 }
-                //dd($data->image, $pleaseRemove);
 
                 $profilExtension  = $profilImage->getClientOriginalExtension();
                 $featuredProfilName  = date('YmdHis').'.'.$profilExtension;

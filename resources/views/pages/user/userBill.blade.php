@@ -2,7 +2,6 @@
 
 @section('content')
     @push('style')
-        @include('components.styles.datatables')
         @include('components.styles.dropify')
     @endpush
     <!-- Content -->
@@ -71,19 +70,13 @@
 
                     @if ($data->status == 'Non-Aktif')
                         <button type="button" class="btn btn-primary float-end" onclick="editBill({{ $data->id }})" id="editBillSubmit">Kirim Bukti Transfer</button>
-                    @else
-                        <button type="button" class="btn btn-primary float-end" onclick="editBill({{ $data->id }})" id="editBillSubmit" disabled>Kirim Bukti Transfer</button>
                     @endif
-
-
                 </form>
             </div>
         </div>
-
     </div>
 
     <!-- / Content -->
-
 
     @push('script')
         @include('components.scripts.dropify')

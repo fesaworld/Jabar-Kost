@@ -61,15 +61,17 @@
                         </div>
                       </a>
                     </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="{{ url('profil') }}">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle">My Profile</span>
-                      </a>
-                    </li>
+                    @if(Auth::user()->getRoleNames()[0] == 'User')
+                        <li>
+                            <div class="dropdown-divider"></div>
+                        </li>
+                        <li>
+                        <a class="dropdown-item" href="{{ url('userProfile') }}">
+                            <i class="bx bx-user me-2"></i>
+                            <span class="align-middle">My Profile</span>
+                        </a>
+                        </li>
+                    @endif
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>

@@ -217,7 +217,7 @@
                                 <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                     <div class="card-title">
                                         <h5 class="text-nowrap mb-2">Data Tagihan</h5>
-                                        <span class="badge bg-label-secondary rounded-pill">{{ $namaKamar }} - {{ $bulan }}</span>
+                                        <span class="badge bg-label-secondary rounded-pill">{{ $namaKamar }}</span>
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold">Total</small>
@@ -232,6 +232,23 @@
                 <div class="col-12 mb-12">
                     <div class="row">
 
+                        {{--  Tampilan Status Aktivasi User  --}}
+                        <div class="col-3 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title d-flex align-items-start justify-content-between">
+                                        <div class="avatar flex-shrink-0">
+                                            <img src="../assets/img/icons/unicons/cc-primary.png" alt="Credit Card"
+                                                class="rounded">
+                                        </div>
+                                    </div>
+                                    <span class="fw-semibold d-block mb-1">Status Aktivasi User</span>
+                                    <small class="text-success fw-semibold">{{ $namaUser }}</small>
+                                    <h3 class="card-title mb-2">{{ $aktifUser }}</h3>
+                                </div>
+                            </div>
+                        </div>
+
                         {{--  Tampilan Sisa Tempo  --}}
                         <div class="col-6 mb-4">
                             <div class="card">
@@ -241,7 +258,7 @@
                                             <img src="../assets/img/icons/unicons/paypal.png" alt="Credit Card" class="rounded">
                                         </div>
                                     </div>
-                                    <span class="d-block mb-1">Sisa Tempo</span>
+                                    <span class="d-block mb-1">Sisa Tempo <span class="badge bg-label-danger rounded-pill">{{ $tempoSewa }}</span></span>
                                     <h3 class="card-title text-nowrap mb-2">{{ $sisaTempo }}</h3>
                                     <small class="text-success text-nowrap fw-semibold">*dari sekarang</small>
                                 </div>
@@ -249,7 +266,7 @@
                         </div>
 
                         {{--  Tampilan Lama Sewa  --}}
-                        <div class="col-6 mb-4">
+                        <div class="col-3 mb-4">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title d-flex align-items-start justify-content-between">

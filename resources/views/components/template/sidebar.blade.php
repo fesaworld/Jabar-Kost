@@ -50,7 +50,7 @@
         <li class="menu-item">
             <a href="icons-boxicons.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-crown"></i>
-                <div data-i18n="Boxicons">Data Penyewa</div>
+                <div data-i18n="Boxicons">Verifikasi Penyewa</div>
             </a>
         </li>
 
@@ -81,7 +81,7 @@
         </li>
 
         <li class="menu-item">
-            <a href="index.html" class="menu-link">
+            <a href="{{ url('/userHistory') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Riwayat Tagihan</div>
             </a>

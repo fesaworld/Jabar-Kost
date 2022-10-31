@@ -32,6 +32,12 @@
         $( "#profileReset" ).prop( "disabled", false );
         $( "#btnUserSubmit" ).prop( "disabled", false );
         $( "#btnUserEdit" ).prop( "disabled", true );
+
+        Swal.fire(
+            'Perhatian!',
+            'Silahkan isi data diri anda',
+            'info'
+        );
     }
 
     $(function () {
@@ -39,6 +45,15 @@
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
+        });
+
+        $('.phone').keyup(function(event) {
+            if(event.which >= 37 && event.which <= 40) return;
+
+            $(this).val(function(index, value) {
+                return value
+                .replace(/\D/g, "")
+            });
         });
 
         $('#btnUserSubmit').click(function (e) {

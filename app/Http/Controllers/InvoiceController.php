@@ -38,6 +38,7 @@ class InvoiceController extends Controller
 
     public function show($id)
     {
+        
         if(is_numeric($id))
         {
             // date('d-m-Y', strtotime($data->start))
@@ -52,8 +53,6 @@ class InvoiceController extends Controller
             $data->name = User::where('id', $data->user_id)->first()->name;
 
             return Response::json($data);
-
-            dd();
         }
 
         $data = Invoice::with('toUser', 'toRoom')->orderBy('id', 'desc')->get();
