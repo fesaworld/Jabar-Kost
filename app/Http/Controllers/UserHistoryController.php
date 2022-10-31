@@ -13,7 +13,7 @@ class UserHistoryController extends Controller
     public function index()
     {
         $data = [
-            'script'            => 'components.scripts.user.userHistory'
+            'script' => 'components.scripts.user.userHistory'
         ];
 
         return view('pages.user.userHistory', $data);
@@ -21,14 +21,6 @@ class UserHistoryController extends Controller
 
     public function show($id)
     {
-        if(is_numeric($id)) {
-            $data = DB::table('stock_logs')->where('id', $id)->first();
-
-            $data->total = number_format($data->total);
-
-            return Response::json($data);
-        }
-
         $data = Invoice::where('user_id', Auth::user()->id)->with('toUser', 'toRoom')->orderBy('id', 'desc')->get();
 
         return DataTables::of($data)

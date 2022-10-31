@@ -102,7 +102,7 @@
                         <input type="file" class="form-control" id="userCard" name="userCard" data-default-file="{{ $data->card_id == null ? asset('assets/image/default/notFound.png') : asset('assets/image/idCard') . '/' . $data->card_id}}">
 
                     </div>
-                    @if ($data->status == 'Non-Aktif')
+                    @if ($data->status != 'Terverifikasi')
                         <div class="float-end">
                             <button type="button" class="btn btn-primary" id="btnUserSubmit" name="btnUserSubmit" disabled>Simpan Profil</button>
                             <button type="button" class="btn btn-danger" id="btnUserEdit" onclick="editProfil({{ $data->id }})">Edit Profil</button>

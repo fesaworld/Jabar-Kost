@@ -58,13 +58,13 @@ class IndexSeeder extends Seeder
             'image' => null,
             'gender' => 'Laki-laki',
             'card_id' => null,
-            'status' => 'Aktif',
+            'status' => 'Terverifikasi',
             'created_at' => date('Y-m-d H:i:s')
         ]);
 
         // buat seeder pengguna
         $data   = [
-            'name'      => 'pengguna_pertama',
+            'name'      => 'User Pertama',
             'email'     => 'user@mail.com',
             'password'  => Hash::make('12345678')
         ];
