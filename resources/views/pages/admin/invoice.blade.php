@@ -45,6 +45,7 @@
     </div>
     @include('components.modals.invoice.create')
     @include('components.modals.invoice.edit')
+    @include('components.modals.invoice.status')
 
     <!-- / Content -->
 

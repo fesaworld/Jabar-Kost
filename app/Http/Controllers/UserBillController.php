@@ -14,13 +14,14 @@ class UserBillController extends Controller
 
         $id = Auth::user()->id;
         $data = Invoice::with('toUser', 'toRoom')->where('user_id', $id)->first();
-        $data->start = date('d F Y', strtotime($data->start));
-        $data->end = date('d F Y', strtotime($data->end));
-        $data->total_price = number_format($data->total_price);
-        $data->discount = number_format($data->discount);
-
-        //dd($data->toUser->name);
-
+        if($data != null)
+        {
+            $data->start = date('d F Y', strtotime($data->start));
+            $data->end = date('d F Y', strtotime($data->end));
+            $data->total_price = number_format($data->total_price);
+            $data->discount = number_format($data->discount);
+        }
+        
         $data = [
             'data' => $data,
             'script' => 'components.scripts.user.userBill'

@@ -62,24 +62,36 @@ class DashboardController extends Controller
 
             $dataDetail = UserDetail::with('detailToUser')->where('user_id', Auth::user()->id)->first();
 
-            if ($dataInv->status == 'Aktif') {$dataTagihan = 0;
-            }else{$dataTagihan = number_format($dataInv->total_price);}
+            if($dataInv != null)
+            {
+                if ($dataInv->status == 'Aktif') {$dataTagihan = 'Rp. 0';
+                }else{$dataTagihan = 'Rp. ' .number_format($dataInv->total_price);}
+
+                $start = new DateTime(date('d-m-Y', strtotime($dataInv->start)));
+                $end = new DateTime(date('d-m-Y', strtotime($dataInv->end)));
+                $datediff = $end->diff($start);
+                $totalBulan = $datediff->days / 31;
+                $totalBulan = ceil($totalBulan);
 
 
-            $start = new DateTime(date('d-m-Y', strtotime($dataInv->start)));
-            $end = new DateTime(date('d-m-Y', strtotime($dataInv->end)));
-            $datediff = $end->diff($start);
-            $totalBulan = $datediff->days / 31;
-            $totalBulan = ceil($totalBulan);
+                $hargaSewa = 'Rp. ' .number_format($dataInv->toRoom->price);
+                $namaKamar = $dataInv->toRoom->name;
+                $sisaTempo = Carbon::createFromTimeStamp(strtotime($dataInv->end))->diffForHumans();
+                $lamaSewa = $totalBulan;
+                $tempoSewa = date('d F Y', strtotime($dataInv->end));
+                $namaUser = Auth::user()->name;
 
+            }else{
+                $sisaTempo = 'Belum ada';
+                $tempoSewa = 'Belum ada';
+                $lamaSewa = 'Belum ada';
+                $dataTagihan = 'Belum ada';
+                $hargaSewa = 'Belum ada';
+                $namaKamar = 'Belum ada';
+            }
 
-            $hargaSewa = number_format($dataInv->toRoom->price);
-            $namaKamar = $dataInv->toRoom->name;
-            $sisaTempo = Carbon::createFromTimeStamp(strtotime($dataInv->end))->diffForHumans();
-            $lamaSewa = $totalBulan;
-            $tempoSewa = date('d F Y', strtotime($dataInv->end));
-            $namaUser = Auth::user()->name;
             $aktifUser = $dataDetail->status;
+            $namaUser = Auth::user()->name;
 
 
             $data = [

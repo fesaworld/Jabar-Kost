@@ -12,6 +12,9 @@
         <div class="card mb-4">
             <div class="card-body">
                 {{--  <form action="{{ url('/userBill/' . $data->id) }}" method="POST" enctype="multipart/form-data">  --}}
+                @if ($data == null)
+                <h5 class="fw-bold py-3"> Anda belum memiliki tagihan pembayaran </h5>
+                @else
                 <form id="editBillForm">
                     {{--  @csrf  --}}
                     <div class="mb-3">
@@ -68,10 +71,11 @@
 
                     </div>
 
-                    @if ($data->status == 'Non-Aktif')
+                    @if ($data->status != 'Aktif')
                         <button type="button" class="btn btn-primary float-end" onclick="editBill({{ $data->id }})" id="editBillSubmit">Kirim Bukti Transfer</button>
                     @endif
                 </form>
+                @endif
             </div>
         </div>
     </div>

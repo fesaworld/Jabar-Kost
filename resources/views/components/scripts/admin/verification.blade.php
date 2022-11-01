@@ -18,14 +18,14 @@
             url: `/verification/${verif_id}`,
             dataType: "json",
             success: function (response) {
-                if(response.image){ $('#profilEdit').attr('src', `/assets/image/profil/${response.image}`); }
-                if(response.card_id){ $('#cardEdit').attr('src', `/assets/image/idCard/${response.card_id}`); }
-                $('#nameEdit').val(response.detail_to_user.name);
-                $('#phoneEdit').val(response.phone);
-                $('#genderEdit').val(response.gender);
-                $('#addEdit').val(response.address);
-                $('#statusEdit').val(response.status);
-                $('#cardEditHidden').val(response.card_id);
+                if(response.detail.image){ $('#profilEdit').attr('src', `/assets/image/profil/${response.detail.image}`); }
+                if(response.detail.card_id){ $('#cardEdit').attr('src', `/assets/image/idCard/${response.detail.card_id}`); }
+                $('#nameEdit').val(response.name);
+                $('#phoneEdit').val(response.detail.phone);
+                $('#genderEdit').val(response.detail.gender);
+                $('#addEdit').val(response.detail.address);
+                $('#statusEdit').val(response.detail.status);
+                $('#cardEditHidden').val(response.detail.card_id);
                 Swal.close();
                 $('#editStatusModal').modal('show');
             }

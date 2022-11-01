@@ -91,7 +91,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                <a class="dropdown-item" href="#">Detail</a>
+                                                <a class="dropdown-item" href="{{ url('room') }}">Detail</a>
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                <a class="dropdown-item" href="#">Detail</a>
+                                                <a class="dropdown-item" href="{{ url('verification') }}">Detail</a>
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +143,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                                                <a class="dropdown-item" href="#">Detail</a>
+                                                <a class="dropdown-item" href="{{ url('token') }}">Detail</a>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +169,7 @@
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                                                <a class="dropdown-item" href="#">Detail</a>
+                                                <a class="dropdown-item" href="{{ url('token') }}">Detail</a>
                                             </div>
                                         </div>
                                     </div>
@@ -199,7 +199,7 @@
                                     </div>
                                     <div class="mt-sm-auto">
 
-                                        <h3 class="mb-0">Rp. {{ $hargaSewa }}</h3>
+                                        <h3 class="mb-0">{{ $hargaSewa }}</h3>
                                         <small class="text-success text-nowrap fw-semibold">/bulan</small>
                                     </div>
                                 </div>
@@ -221,7 +221,7 @@
                                     </div>
                                     <div class="mt-sm-auto">
                                         <small class="text-success text-nowrap fw-semibold">Total</small>
-                                        <h3 class="mb-0">Rp. {{ $dataTagihan }}</h3>
+                                        <h3 class="mb-0">{{ $dataTagihan }}</h3>
                                     </div>
                                 </div>
                             </div>

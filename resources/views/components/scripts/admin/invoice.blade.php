@@ -56,53 +56,31 @@
         });
     }
 
+
     const statusInv = (id) => {
         Swal.fire({
-            title: 'Apa anda yakin untuk merubah status?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Ya',
-            cancelButtonText: 'Tidak'
-        }).then((result) => {
-            Swal.close();
+            title: 'Mohon tunggu',
+            showConfirmButton: false,
+            allowOutsideClick: false,
+            willOpen: () => {
+                Swal.showLoading()
+            }
+        });
 
-            if(result.value) {
-                Swal.fire({
-                    title: 'Mohon tunggu',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    willOpen: () => {
-                        Swal.showLoading()
-                    }
-                });
+        inv_id = id;
 
-                $.ajax({
-                    type: "post",
-                    url: `/invoiceStatus/${id}`,
-                    dataType: "json",
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    success: function(data) {
-                        Swal.close();
-
-                        if(data.status) {
-                            Swal.fire(
-                                'Success!',
-                                data.msg,
-                                'success'
-                            )
-
-                            $('#invTable').DataTable().ajax.reload();
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                data.msg,
-                                'warning'
-                            )
-                        }
-                    }
-                })
+        $.ajax({
+            type: "get",
+            url: `/invoice/${inv_id}`,
+            dataType: "json",
+            success: function (response) {
+                $('#nameStatusInvEdit').val(response.name);
+                $('#roomStatusInvEdit').val(response.room_id);
+                $('#startStatusInvEdit').val(response.start);
+                $('#endStatusInvEdit').val(response.end);
+                $('#statusStatusInvEdit').val(response.status);
+                Swal.close();
+                $('#editStatusInvModal').modal('show');
             }
         });
     }
@@ -260,6 +238,56 @@
                         ).then(() => {
 
                             $('#editRoomModal').modal('show');
+                        })
+                    }
+                }
+            })
+        });
+
+        $('#editStatusInvSubmit').click(function (e) {
+            e.preventDefault();
+
+            var formData = $('#editStatusInvForm').serialize();
+
+            $('#editStatusInvModal').modal('hide');
+
+            Swal.fire({
+                title: 'Mohon tunggu',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                willOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
+            $.ajax({
+                type: "post",
+                url: `/invoiceStatus/${inv_id}`,
+                data: formData,
+                dataType: "json",
+                cache: false,
+                processData: false,
+                success: function(data) {
+                    Swal.close();
+
+                    if(data.status) {
+                        Swal.fire(
+                            'Success!',
+                            data.msg,
+                            'success'
+                        )
+
+                        inv_id = null;
+
+                        $('#invTable').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            data.msg,
+                            'warning'
+                        ).then(() => {
+
+                            $('#editStatusInvModal').modal('show');
                         })
                     }
                 }

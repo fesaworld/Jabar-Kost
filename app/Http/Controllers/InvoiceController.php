@@ -6,6 +6,7 @@ use DateTime;
 use App\User;
 use App\Room;
 use App\Invoice;
+use App\UserDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -163,10 +164,6 @@ class InvoiceController extends Controller
             $totalDiskon = ($totalHarga / 100) * $request->invDisc;
             $totalHarga = $totalHarga - $totalDiskon;
 
-
-            $dataStok = Room::where('id', $request->invRoom)->first()->stok;
-            $dataStok = $dataStok - 1;
-
             try{
                 Invoice::create([
                     'user_id' => $request->invName,
@@ -178,11 +175,6 @@ class InvoiceController extends Controller
                     'trf_image' => null,
                     'status' => 'Non-Aktif',
                     'created_at' => date('Y-m-d H:i:s'),
-                ]);
-
-                Room::whereId($request->invRoom)->update([
-                    'stok' => $dataStok,
-                    'updated_at' => date('Y-m-d H:i:s')
                 ]);
 
                 $json = [
@@ -261,27 +253,14 @@ class InvoiceController extends Controller
         return Response::json($json);
     }
 
-    public function updateStatus($id)
+    public function updateStatus(Request $request, $id)
     {
         $data = Invoice::where('id', $id)->first();
-        $dataStatus = $data->status;
         $dataStok = Room::where('id', $data->room_id)->first()->stok;
+        $dataStatus = $request->statusStatusInvEdit;
 
-        if($dataStok < 1 && $dataStatus == 'Non-Aktif')
-        {
-            $json = [
-                'msg'       => 'Stok kamar yang dipilih sedang kosong',
-                'status'    => false
-            ];
-        }else{
-
-            if($dataStatus == 'Aktif'){
-                $dataStatus = 'Non-Aktif';
-                $dataStokRoom = $dataStok + 1;
-            } elseif ($dataStatus == 'Non-Aktif') {
-                $dataStatus = 'Aktif';
-                $dataStokRoom = $dataStok - 1;
-            }
+        if($dataStatus == 'Non-Aktif' || $dataStatus == 'Selesai'){
+            $dataStokRoom = $dataStok + 1;
 
             try{
                 Invoice::whereId($id)->update([
@@ -306,6 +285,66 @@ class InvoiceController extends Controller
                     'line'      => $e->getLine(),
                     'message'   => $e->getMessage(),
                 ];
+            }
+        }elseif($dataStatus == 'Ditolak'){
+
+            $pleaseRemove = base_path('public/assets/image/buktiTrf/'). $data->trf_image;
+
+            if(file_exists($pleaseRemove)) {
+                unlink($pleaseRemove);
+            }
+
+            try{
+                Invoice::whereId($id)->update([
+                    'status' => $dataStatus,
+                    'trf_image' => NULL,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+
+                $json = [
+                    'msg' => 'Status menjadi : ' . $dataStatus. ', dan bukti Tf dihapus',
+                    'status' => true
+                ];
+            } catch(Exception $e){
+                $json = [
+                    'msg' => 'error',
+                    'status' => false,
+                    'e' => $e,
+                ];
+            };
+        }else{
+            if($dataStok < 1){
+                $json = [
+                    'msg'       => 'Stok kamar yang dipilih sedang kosong',
+                    'status'    => false
+                ];
+            }else{
+                $dataStokRoom = $dataStok - 1;
+
+                try{
+                    Invoice::whereId($id)->update([
+                        'status' => $dataStatus,
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+
+                    Room::whereId($data->room_id)->update([
+                        'stok' => $dataStokRoom,
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
+
+                    $json = [
+                        'msg' => 'Status menjadi : ' . $dataStatus,
+                        'status' => true
+                    ];
+                } catch(Exception $e) {
+                    $json = [
+                        'msg'       => 'error',
+                        'status'    => false,
+                        'e'         => $e,
+                        'line'      => $e->getLine(),
+                        'message'   => $e->getMessage(),
+                    ];
+                }
             }
         }
         return Response::json($json);

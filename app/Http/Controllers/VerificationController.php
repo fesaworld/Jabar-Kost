@@ -25,29 +25,41 @@ class VerificationController extends Controller
     public function show($id)
     {
         if(is_numeric($id)) {
-            $data = UserDetail::where('id', $id)->with('detailToUser')->first();
+
+            $data = User::where('id', $id)->with('detail')->first();
 
             return Response::json($data);
         }
 
         $data = User::where('id','<>', '1')->with('detail')->orderBy('id', 'desc')->get();
-        //$data->detail;
-
-        // $data = UserDetail::where('id','<>', '1')->with('detailToUser')->orderBy('id', 'desc')->get();
 
         return DataTables::of($data)
 
             ->editColumn('detail.image', function($row){
                 $data = array('image' => $row->detail->image);
-
                 return view('components.images.profil', $data);
             })
 
             ->editColumn('detail.card_id', function($row){
                 $data = array('image' => $row->detail->card_id);
-
                 return view('components.images.idCard', $data);
             })
+
+            ->editColumn(
+                'detail.phone',
+                function($row) {
+                    if($row->detail->phone == NULL){return '-';}
+                    else{return $row->detail->phone;}
+                }
+            )
+
+            ->editColumn(
+                'detail.gender',
+                function($row) {
+                    if($row->detail->gender == NULL){return '-';}
+                    else{return $row->detail->gender;}
+                }
+            )
 
             ->addColumn(
                 'action',

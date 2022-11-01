@@ -84,8 +84,8 @@ class IndexSeeder extends Seeder
             'phone' => '12345678',
             'image' => 'profil.png',
             'gender' => 'Laki-laki',
-            'card_id' => null,
-            'status' => 'Non-Aktif',
+            'card_id' => 'idCard.png',
+            'status' => 'Terverifikasi',
             'created_at' => date('Y-m-d H:i:s')
         ]);
     }

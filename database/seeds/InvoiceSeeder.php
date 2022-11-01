@@ -20,7 +20,7 @@ class InvoiceSeeder extends Seeder
             'discount' => '0',
             'total_price' => '500000',
             'trf_image' => 'transfer.jpg',
-            'status' => 'Aktif',
+            'status' => 'Berjalan',
             'created_at' => date('Y-m-d H:i:s'),
         ]);
     }
