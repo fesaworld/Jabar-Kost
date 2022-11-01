@@ -19,10 +19,13 @@ class InvoiceController extends Controller
     {
 
         $exclude = [];
-        $id = Invoice::get();
+        $id = Invoice::where('status', '<>', 'Selesai')->get();
+
         foreach($id as $userId) {
             $exclude[] = $userId->user_id;
         }
+
+
         $getUser = User::where('id', '<>', Auth::user()->id)->whereNotIn('id', $exclude)->get();
 
 
