@@ -38,7 +38,7 @@ class InvoiceController extends Controller
 
     public function show($id)
     {
-        
+
         if(is_numeric($id))
         {
             // date('d-m-Y', strtotime($data->start))
@@ -163,6 +163,10 @@ class InvoiceController extends Controller
             $totalDiskon = ($totalHarga / 100) * $request->invDisc;
             $totalHarga = $totalHarga - $totalDiskon;
 
+
+            $dataStok = Room::where('id', $request->invRoom)->first()->stok;
+            $dataStok = $dataStok - 1;
+
             try{
                 Invoice::create([
                     'user_id' => $request->invName,
@@ -174,6 +178,11 @@ class InvoiceController extends Controller
                     'trf_image' => null,
                     'status' => 'Non-Aktif',
                     'created_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                Room::whereId($request->invRoom)->update([
+                    'stok' => $dataStok,
+                    'updated_at' => date('Y-m-d H:i:s')
                 ]);
 
                 $json = [
@@ -254,44 +263,51 @@ class InvoiceController extends Controller
 
     public function updateStatus($id)
     {
-        $data = Invoice::where('id', $id)->first()->status;
+        $data = Invoice::where('id', $id)->first();
+        $dataStatus = $data->status;
+        $dataStok = Room::where('id', $data->room_id)->first()->stok;
 
-        $dataStok = Room::where('id', $id)->first();
-
-
-        if($data == 'Aktif'){
-            $data = 'Non-Aktif';
-            $dataStok = $dataStok->stok + 1;
-        } elseif ($data == 'Non-Aktif') {
-            $data = 'Aktif';
-            $dataStok = $dataStok->stok - 1;
-        }
-
-        try{
-            Invoice::whereId($id)->update([
-                'status' => $data,
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-
-            Room::whereId($id)->update([
-                'stok' => $dataStok,
-                'updated_at' => date('Y-m-d H:i:s')
-            ]);
-
+        if($dataStok < 1 && $dataStatus == 'Non-Aktif')
+        {
             $json = [
-                'msg' => 'Status menjadi : ' . $data,
-                'status' => true
+                'msg'       => 'Stok kamar yang dipilih sedang kosong',
+                'status'    => false
             ];
-        } catch(Exception $e) {
-            $json = [
-                'msg'       => 'error',
-                'status'    => false,
-                'e'         => $e,
-                'line'      => $e->getLine(),
-                'message'   => $e->getMessage(),
-            ];
-        }
+        }else{
 
+            if($dataStatus == 'Aktif'){
+                $dataStatus = 'Non-Aktif';
+                $dataStokRoom = $dataStok + 1;
+            } elseif ($dataStatus == 'Non-Aktif') {
+                $dataStatus = 'Aktif';
+                $dataStokRoom = $dataStok - 1;
+            }
+
+            try{
+                Invoice::whereId($id)->update([
+                    'status' => $dataStatus,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+
+                Room::whereId($data->room_id)->update([
+                    'stok' => $dataStokRoom,
+                    'updated_at' => date('Y-m-d H:i:s')
+                ]);
+
+                $json = [
+                    'msg' => 'Status menjadi : ' . $dataStatus,
+                    'status' => true
+                ];
+            } catch(Exception $e) {
+                $json = [
+                    'msg'       => 'error',
+                    'status'    => false,
+                    'e'         => $e,
+                    'line'      => $e->getLine(),
+                    'message'   => $e->getMessage(),
+                ];
+            }
+        }
         return Response::json($json);
     }
 
