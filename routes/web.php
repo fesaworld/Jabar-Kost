@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+require_once('includes/landing/landing.php');
+
 require_once('includes/auth.php');
 
 Route::group([

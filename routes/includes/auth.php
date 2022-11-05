@@ -6,8 +6,8 @@ Route::group([
     'middleware' => 'guest',
 ], function() {
     // buat login
-    Route::get('/', 'AuthController@viewLogin')->name('login');
-    Route::post('/', 'AuthController@login');
+    Route::get('/login', 'AuthController@viewLogin')->name('login');
+    Route::post('/login', 'AuthController@login');
 
     //buat register
     Route::get('/register', 'AuthController@viewRegister')->name('register');

@@ -102,7 +102,7 @@
           </div>
         @enderror
 
-          <form id="formAuthentication" class="mb-3" action="{{ url('/') }}" method="POST">
+          <form id="formAuthentication" class="mb-3" action="{{ url('/login') }}" method="POST">
             @csrf
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>

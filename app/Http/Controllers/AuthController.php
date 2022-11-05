@@ -82,7 +82,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $rules = [
-            'username'     => 'required',
+            'username'  => 'required',
             'email'     => 'required|email|unique:users',
             'password'  => 'required|min:8',
             'token'     => 'required'
@@ -92,7 +92,7 @@ class AuthController extends Controller
             'username.required' => 'Username wajib diisi',
             'email.required'    => 'E-mail wajib diisi',
             'email.email'       => 'Format E-mail salah',
-            'email.unique'       => 'E-mail sudah digunakan',
+            'email.unique'      => 'E-mail sudah digunakan',
             'password.required' => 'Password wajib diisi',
             'password.min'      => 'Password minimal mengandung 8 karakter',
             'token.required'    => 'Kode referral wajib diisi',
