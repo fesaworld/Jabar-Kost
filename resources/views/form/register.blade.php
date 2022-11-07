@@ -75,12 +75,12 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="{{ url('/dashboard') }}" class="app-brand-link gap-2">
-                  <span class="demo text-body fw-bolder">JABAR-Kost</span>
+                <a href="{{ url('/') }}" class="app-brand-link gap-2">
+                  <span class="demo text-body fw-bolder">JABAR Kost</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">Welcome to JABAR-Kost! 👋</h4>
+              <h4 class="mb-2">Welcome to JABAR Kost! 👋</h4>
               <p class="mb-4">Mohon masuk untuk melakukan pemesanan atau mendaftar terlebih dahulu</p>
 
             @error('error')
@@ -138,23 +138,25 @@
                 </div>
                 <div class="mb-3">
                     <label for="token" class="form-label">Kode Referral</label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="token"
-                      name="token"
-                      placeholder="Masukkan Kode Referral"
-                      autofocus
-                    />
-                {{--  @error('token')
+                    <div class="row">
+                        <div class="col-7"><input
+                            type="text"
+                            class="form-control"
+                            id="token"
+                            name="token"
+                            placeholder="Masukkan token"
+                            autofocus
+                            /></div>
+                        <div class="col-5"><a class="btn btn-info" href="{{ url('https://wasap.at/fFJhzI') }}">Minta Token</a></div>
+                      </div>
+                @error('token')
                     <span class="text-danger" style="display: block;">
                         {{ $message }}
                     </span>
-                @enderror  --}}
+                @enderror
                   </div>
                 <button class="btn btn-primary d-grid w-100">Sign up</button>
               </form>
-
               <p class="text-center">
                 <span>Sudah punya akun?</span>
                 <a href="{{ route('login') }}">

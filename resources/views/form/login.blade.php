@@ -86,13 +86,13 @@
         <div class="card-body">
           <!-- Logo -->
           <div class="app-brand justify-content-center">
-            <a href="{{ url('/dashboard') }}" class="app-brand-link gap-2">
+            <a href="{{ url('/') }}" class="app-brand-link gap-2">
               <span class="app-brand-logo demo"></span>
-              <span class="demo text-body fw-bolder">JABAR-Kost</span>
+              <span class="demo text-body fw-bolder">JABAR Kost</span>
             </a>
           </div>
           <!-- /Logo -->
-          <h4 class="mb-2">Welcome to JABAR-Kost! 👋</h4>
+          <h4 class="mb-2">Welcome to JABAR Kost! 👋</h4>
           <p class="mb-4">Mohon masuk untuk melakukan pemesanan atau mendaftar terlebih dahulu</p>
 
         @error('error')
