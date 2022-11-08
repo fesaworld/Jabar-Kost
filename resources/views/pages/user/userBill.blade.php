@@ -71,8 +71,10 @@
 
                     </div>
 
-                    @if ($data->status != 'Aktif')
+                    @if ($data->status == 'Non-Aktif' || $data->status == 'Ditolak')
                         <button type="button" class="btn btn-primary float-end" onclick="editBill({{ $data->id }})" id="editBillSubmit">Kirim Bukti Transfer</button>
+                    @else
+                        <a href="{{ url('/userBillPrint/' .$data->id) }}" class="btn btn-primary float-end">Cetak Pembayaran</a>
                     @endif
                 </form>
                 @endif
