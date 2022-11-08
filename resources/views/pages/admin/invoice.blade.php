@@ -14,11 +14,11 @@
         <!-- Hoverable Table rows -->
         <div class="card">
             {{--  Buat Button  --}}
-            <h5 class="card-header">
+            {{--  <h5 class="card-header">
                 <button type="button" class="btn rounded-pill btn-primary" onclick="createInv()">
                     <span class="tf-icons bx bxs-plus-square "></span>&nbsp; Tambah data baru
                 </button>
-            </h5>
+            </h5>  --}}
             <div class="table-responsive text-nowrap m-3">
                 <table class="table table-hover" id="invTable">
                     <thead>

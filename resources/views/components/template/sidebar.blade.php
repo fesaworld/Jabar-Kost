@@ -69,7 +69,12 @@
                 <div data-i18n="Analytics">Dashboard</div>
             </a>
         </li>
-
+        <li class="menu-item">
+            <a href="{{ url('/userOrder') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <div data-i18n="Analytics">Pesan Kamar</div>
+            </a>
+        </li>
         <!-- Pembayaran Kost -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pembayaran Kost</span></li>
         <!-- Cards -->

@@ -16,7 +16,7 @@
         }).then((result) => {
             Swal.close();
 
-            if(result.value) {
+            if (result.value) {
                 Swal.fire({
                     title: 'Mohon tunggu',
                     showConfirmButton: false,
@@ -35,7 +35,7 @@
                     success: function(data) {
                         Swal.close();
 
-                        if(data.status) {
+                        if (data.status) {
                             Swal.fire(
                                 'Success!',
                                 data.msg,
@@ -73,7 +73,7 @@
             type: "get",
             url: `/invoice/${inv_id}`,
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 $('#nameStatusInvEdit').val(response.name);
                 $('#roomStatusInvEdit').val(response.room_id);
                 $('#startStatusInvEdit').val(response.start);
@@ -101,7 +101,7 @@
             type: "get",
             url: `/invoice/${inv_id}`,
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 $('#invEditName').val(response.name);
                 $('#invEditRoom').val(response.room_id);
                 $('#invEditStart').val(response.start);
@@ -113,7 +113,7 @@
         });
     }
 
-    $(function () {
+    $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -122,7 +122,10 @@
 
         $('#invTable').DataTable({
             order: [],
-            lengthMenu: [[10, 25, 50, 100, -1], ['10', '25', '50', '100', 'Semua']],
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                ['10', '25', '50', '100', 'Semua']
+            ],
             filter: true,
             processing: true,
             responsive: true,
@@ -130,22 +133,52 @@
             ajax: {
                 url: '/invoice/lihatInvoice'
             },
-            "columns":
-            [
-                { data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'user_id', name:'to_user.name'},
-                { data: 'room_id', name:'to_room.name'},
-                { data: 'start', name:'member.name'},
-                { data: 'end', name:'member.name'},
-                { data: 'discount', name:'member.name'},
-                { data: 'price', name:'member.price'},
-                { data: 'trf_image', name:'member.stok'},
-                { data: 'status', name:'member.detail'},
-                { data: 'action', orderable: false, searchable: false},
+            "columns": [{
+                    data: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'user_id',
+                    name: 'to_user.name'
+                },
+                {
+                    data: 'room_id',
+                    name: 'to_room.name'
+                },
+                {
+                    data: 'start',
+                    name: 'member.name'
+                },
+                {
+                    data: 'end',
+                    name: 'member.name'
+                },
+                {
+                    data: 'discount',
+                    name: 'member.name'
+                },
+                {
+                    data: 'price',
+                    name: 'member.price'
+                },
+                {
+                    data: 'trf_image',
+                    name: 'member.stok'
+                },
+                {
+                    data: 'status',
+                    name: 'member.detail'
+                },
+                {
+                    data: 'action',
+                    orderable: false,
+                    searchable: false
+                },
             ]
         });
 
-        $('#createInvSubmit').click(function (e) {
+        $('#createInvSubmit').click(function(e) {
             e.preventDefault();
 
             var formData = $('#createInvForm').serialize();
@@ -171,30 +204,30 @@
                 success: function(data) {
                     Swal.close();
 
-                    if(data.status) {
+                    if (data.status) {
                         Swal.fire(
                             'Success!',
                             data.msg,
                             'success'
-                            )
+                        )
 
-                            $('#invTable').DataTable().ajax.reload();
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                data.msg,
-                                'warning'
-                                ).then(() => {
+                        $('#invTable').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            data.msg,
+                            'warning'
+                        ).then(() => {
 
-                                    $('#createInvModal').modal('show');
-                                })
+                            $('#createInvModal').modal('show');
+                        })
 
                     }
                 }
             })
         });
 
-        $('#editInvSubmit').click(function (e) {
+        $('#editInvSubmit').click(function(e) {
             e.preventDefault();
 
             var formData = $('#editInvForm').serialize();
@@ -220,7 +253,7 @@
                 success: function(data) {
                     Swal.close();
 
-                    if(data.status) {
+                    if (data.status) {
                         Swal.fire(
                             'Success!',
                             data.msg,
@@ -244,7 +277,7 @@
             })
         });
 
-        $('#editStatusInvSubmit').click(function (e) {
+        $('#editStatusInvSubmit').click(function(e) {
             e.preventDefault();
 
             var formData = $('#editStatusInvForm').serialize();
@@ -270,7 +303,7 @@
                 success: function(data) {
                     Swal.close();
 
-                    if(data.status) {
+                    if (data.status) {
                         Swal.fire(
                             'Success!',
                             data.msg,
@@ -294,5 +327,4 @@
             })
         });
     });
-
 </script>

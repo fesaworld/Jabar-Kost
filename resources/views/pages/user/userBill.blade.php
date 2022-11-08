@@ -13,7 +13,7 @@
             <div class="card-body">
                 {{--  <form action="{{ url('/userBill/' . $data->id) }}" method="POST" enctype="multipart/form-data">  --}}
                 @if ($data == null)
-                <h5 class="fw-bold py-3"> Anda belum memiliki tagihan pembayaran </h5>
+                <h5 class="fw-bold py-3"> Anda belum memiliki tagihan pembayaran aktif </h5>
                 @else
                 <form id="editBillForm">
                     {{--  @csrf  --}}

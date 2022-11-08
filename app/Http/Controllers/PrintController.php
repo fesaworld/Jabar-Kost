@@ -33,6 +33,6 @@ class PrintController extends Controller
 
 //dd($invoice);
         $pdf = PDF::loadview('pages.print.userBillPrint', $data)->setPaper('a4', 'portrait');
-        return $pdf->download('invoice.pdf');
+        return $pdf->stream('invoice.pdf');
     }
 }

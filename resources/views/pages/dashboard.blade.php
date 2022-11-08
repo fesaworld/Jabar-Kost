@@ -16,6 +16,9 @@
                                 @role('Super Admin')
                                 <a class="btn btn-sm btn-outline-primary" onclick="createTokenDashboard()">Generate Token</a>
                                 @endrole
+                                @role('User')
+                                <a href="{{ url('/userOrder') }}" class="btn btn-sm btn-outline-primary">Pesan Kamar</a>
+                                @endrole
                             </div>
                         </div>
                         <div class="col-sm-5 text-center text-sm-left">

@@ -58,7 +58,7 @@ class DashboardController extends Controller
 
             // Buat Dashboard User
 
-            $dataInv = Invoice::where('user_id', Auth::user()->id)->first();
+            $dataInv = Invoice::where('user_id', Auth::user()->id)->where('status', '<>', 'Selesai')->first();
 
             $dataDetail = UserDetail::with('detailToUser')->where('user_id', Auth::user()->id)->first();
 
