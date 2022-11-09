@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
-use App\User;
 use App\Room;
+use App\User;
+use DateTime;
+use Exception;
 use App\Invoice;
-use App\UserDetail;
 use Carbon\Carbon;
+use App\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Support\Facades\Auth;
 
 class InvoiceController extends Controller
 {
