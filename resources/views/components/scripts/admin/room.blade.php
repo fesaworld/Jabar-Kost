@@ -6,6 +6,10 @@
         $('#createRoomModal').modal('show');
     }
 
+    const importRoom = () => {
+        $('#importRoom').modal('show');
+    }
+
     const deleteRoom = (id) => {
         Swal.fire({
             title: 'Apa anda yakin untuk menghapus?',
@@ -16,7 +20,7 @@
         }).then((result) => {
             Swal.close();
 
-            if(result.value) {
+            if (result.value) {
                 Swal.fire({
                     title: 'Mohon tunggu',
                     showConfirmButton: false,
@@ -30,10 +34,10 @@
                     type: "delete",
                     url: `/room/${id}`,
                     dataType: "json",
-                    success: function (response) {
+                    success: function(response) {
                         Swal.close();
 
-                        if(response.status) {
+                        if (response.status) {
                             Swal.fire(
                                 'Success!',
                                 response.msg,
@@ -70,7 +74,7 @@
             type: "get",
             url: `/room/${room_id}`,
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 $('#roomNameEdit').val(response.name);
                 $('#roomPriceEdit').val(response.price);
                 $('#roomStockEdit').val(response.stok);
@@ -81,7 +85,7 @@
         });
     }
 
-    $(function () {
+    $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -90,7 +94,12 @@
 
         $('#roomTable').DataTable({
             order: [],
-            lengthMenu: [[10, 25, 50, 100, -1], ['10', '25', '50', '100', 'Semua']],
+            dom: 'Bfrtip',
+            buttons: ['excel', 'pdf'],
+            lengthMenu: [
+                [10, 25, 50, 100, -1],
+                ['10', '25', '50', '100', 'Semua']
+            ],
             filter: true,
             processing: true,
             responsive: true,
@@ -98,28 +107,46 @@
             ajax: {
                 url: '/room/lihatRoom'
             },
-            "columns":
-            [
-                { data: 'DT_RowIndex', orderable: false, searchable: false},
-                { data: 'name', name:'member.name'},
-                { data: 'price', name:'member.price'},
-                { data: 'stok', name:'member.stok'},
-                { data: 'detail', name:'member.detail'},
-                { data: 'action', orderable: false, searchable: false},
+            "columns": [{
+                    data: 'DT_RowIndex',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'name',
+                    name: 'member.name'
+                },
+                {
+                    data: 'price',
+                    name: 'member.price'
+                },
+                {
+                    data: 'stok',
+                    name: 'member.stok'
+                },
+                {
+                    data: 'detail',
+                    name: 'member.detail'
+                },
+                {
+                    data: 'action',
+                    orderable: false,
+                    searchable: false
+                },
             ]
         });
 
         $('.roomPrice').keyup(function(event) {
-            if(event.which >= 37 && event.which <= 40) return;
+            if (event.which >= 37 && event.which <= 40) return;
 
             $(this).val(function(index, value) {
                 return value
-                .replace(/\D/g, "")
-                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    .replace(/\D/g, "")
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
             });
         });
 
-        $('#createRoomSubmit').click(function (e) {
+        $('#createRoomSubmit').click(function(e) {
             e.preventDefault();
 
             var formData = $('#createRoomForm').serialize();
@@ -145,30 +172,30 @@
                 success: function(data) {
                     Swal.close();
 
-                    if(data.status) {
+                    if (data.status) {
                         Swal.fire(
                             'Success!',
                             data.msg,
                             'success'
-                            )
+                        )
 
-                            $('#roomTable').DataTable().ajax.reload();
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                data.msg,
-                                'warning'
-                                ).then(() => {
+                        $('#roomTable').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            data.msg,
+                            'warning'
+                        ).then(() => {
 
-                                    $('#createRoomModal').modal('show');
-                                })
+                            $('#createRoomModal').modal('show');
+                        })
 
                     }
                 }
             })
         });
 
-        $('#editRoomSubmit').click(function (e) {
+        $('#editRoomSubmit').click(function(e) {
             e.preventDefault();
 
             var formData = $('#editRoomForm').serialize();
@@ -194,7 +221,7 @@
                 success: function(data) {
                     Swal.close();
 
-                    if(data.status) {
+                    if (data.status) {
                         Swal.fire(
                             'Success!',
                             data.msg,

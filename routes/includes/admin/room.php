@@ -10,4 +10,5 @@ Route::group([
     Route::post('/room', 'RoomController@store');
     Route::post('/room/{id}', 'RoomController@update');
     Route::delete('/room/{id}', 'RoomController@destroy');
+    Route::post('/roomImport','RoomController@import');
 });
