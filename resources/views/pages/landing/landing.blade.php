@@ -325,7 +325,7 @@
                             <h2 class="display-6 mb-5">Dengan kemajuan teknologi dan semakin cepatnya perkembangan informasi. JABAR Kost hadir sebagai sebuah inovasi untuk mempermudah anda dalam memesan kamar kost favorit anda dimanapun anda berada.</h2>
                         </div>
                         <div class="col-12">
-                            <a href="https://wasap.at/yA2xdC" class="btn btn-warning btn-xl shadow me-3 mt-4"
+                            <a href="https://wasap.at/x3TXSG" class="btn btn-warning btn-xl shadow me-3 mt-4"
                                 data-aos="fade-down">Hubungi kami</a>
                         </div>
                     </div>

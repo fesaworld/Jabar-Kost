@@ -147,7 +147,7 @@
                             placeholder="Masukkan token"
                             autofocus
                             /></div>
-                        <div class="col-5"><a class="btn btn-info" href="{{ url('https://wasap.at/fFJhzI') }}">Minta Token</a></div>
+                        <div class="col-5"><a class="btn btn-info" href="{{ url('https://wasap.at/eWAXOv') }}">Minta Token</a></div>
                       </div>
                 @error('token')
                     <span class="text-danger" style="display: block;">
