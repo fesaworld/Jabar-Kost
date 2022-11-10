@@ -81,7 +81,7 @@ class TokenController extends Controller
 
         if($token == 'Aktif') {
             return Response::json([
-               'msg' => 'Data token aktif tidak bisa dihapus',
+               'msg' => 'Data token Aktif tidak bisa dihapus',
                'status' => false
             ]);
         }else{

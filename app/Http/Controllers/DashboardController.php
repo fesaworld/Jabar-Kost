@@ -34,10 +34,17 @@ class DashboardController extends Controller
 
             $tokenAktif = ReferralCode::where('status', 'Aktif')->count();
 
-            $pemasukan = Invoice::where('status', 'Aktif')->whereMonth('created_at', date('m'))->sum('total_price');
+            $pemasukan = Invoice::where('status', '<>', 'Non-Aktif')
+                ->where('status', '<>', 'Ditolak')
+                ->whereMonth('created_at', date('m'))
+                ->sum('total_price');
             $pemasukan = number_format($pemasukan);
 
-            $tunggakan = Invoice::where('status', 'Non-Aktif')->whereMonth('created_at', date('m'))->sum('total_price');
+            $tunggakan = Invoice::where('status', '<>', 'Lunas')
+                ->where('status', '<>', 'Berjalan')
+                ->where('status', '<>', 'Selesai')
+                ->whereMonth('created_at', date('m'))
+                ->sum('total_price');
             $tunggakan = number_format($tunggakan);
 
             $data = [

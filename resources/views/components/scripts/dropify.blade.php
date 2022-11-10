@@ -4,5 +4,7 @@
     $(function () {
         $('#imageTrf').dropify();
         $('#userCard').dropify();
+        $('#roomImage').dropify();
+        $('#roomImageEdit').dropify();
     });
 </script>

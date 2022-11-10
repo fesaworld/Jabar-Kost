@@ -35,32 +35,38 @@ class RoomController extends Controller
 
         return DataTables::of($data)
 
-            ->editColumn(
-                'stok',
-                function($row) {
-                    return $row->stok.' Kamar';
-                }
-            )
+        ->editColumn('image', function($row){
+            $data = array('image' => $row->image);
 
-            ->editColumn(
-                'price',
-                function($row) {
-                    return number_format($row->price);
-                }
-            )
+            return view('components.images.room', $data);
+        })
 
-            ->addColumn(
-                'action',
-                function($row) {
-                    $data = [
-                        'id' => $row->id
-                    ];
+        ->editColumn(
+            'stok',
+            function($row) {
+                return $row->stok.' Kamar';
+            }
+        )
 
-                    return view('components.buttons.room', $data);
-                }
-            )
-            ->addIndexColumn()
-            ->make(true);
+        ->editColumn(
+            'price',
+            function($row) {
+                return number_format($row->price);
+            }
+        )
+
+        ->addColumn(
+            'action',
+            function($row) {
+                $data = [
+                    'id' => $row->id
+                ];
+
+                return view('components.buttons.room', $data);
+            }
+        )
+        ->addIndexColumn()
+        ->make(true);
     }
 
     public function store(Request $request)
@@ -95,11 +101,21 @@ class RoomController extends Controller
         }else {
             try{
 
+                if($request->file('roomImage'))
+                {
+                    $post_image = $request->file('roomImage');
+                    $extension  = $post_image->getClientOriginalExtension();
+                    $featuredImageName  = date('YmdHis').'.'.$extension;
+                    $destination = base_path('public/assets/image/room');
+                    $post_image->move($destination, $featuredImageName);
+                } else { $featuredImageName = "";}
+
                 Room::create([
                     'name' => $request->roomName,
                     'price' => str_replace(',','',$request->roomPrice),
                     'stok' => $request->roomStock,
                     'detail' => $request->roomDetail,
+                    'image' => $featuredImageName,
                     'created_at' => date('Y-m-d H:i:s')
                 ]);
 
@@ -149,12 +165,35 @@ class RoomController extends Controller
                 'status'    => false
             ];
         }else {
+            $dataImage = Room::where('id', $id)->first()->image;
             try{
+                if($request->file('roomImageEdit'))
+                {
+                    $post_image = $request->file('roomImageEdit');
+                    $fileName = Room::where('id', $id)->get()->first()->image;
+
+
+                    if($fileName)
+                    {
+                        $pleaseRemove = base_path('public/assets/image/room').$dataImage;
+
+                        if(file_exists($pleaseRemove)) {
+                            unlink($pleaseRemove);
+                        }
+                    }
+
+                    $extension  = $post_image->getClientOriginalExtension();
+                    $featuredImageName  = date('YmdHis').'.'.$extension;
+                    $destination = base_path('public/assets/image/room');
+                    $post_image->move($destination, $featuredImageName);
+                } else { $featuredImageName = $dataImage;}
+
                 Room::whereId($id)->update([
                     'name' => $request->roomNameEdit,
                     'price' => str_replace(',','',$request->roomPriceEdit),
                     'stok' => $request->roomStockEdit,
                     'detail' => $request->roomDetailEdit,
+                    'image' => $featuredImageName,
                     'updated_at' => date('Y-m-d H:i:s')
                 ]);
 
@@ -189,7 +228,7 @@ class RoomController extends Controller
                 Room::where('id',$id)->Delete();
 
                 $json = [
-                    'msg' => 'Token berhasil dihapus',
+                    'msg' => 'Kamar berhasil dihapus',
                     'status' => true
                 ];
             } catch(Exception $e){
