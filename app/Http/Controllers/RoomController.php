@@ -205,7 +205,9 @@ class RoomController extends Controller
 
     public function import(Request $request){
         $data = $request -> file('import');
-        Excel::import(new RoomImport,$data);
+        Excel::import(new RoomImport,$data,null,\Maatwebsite\Excel\Excel::XLS);
+        
+        
         return redirect()->back();
     }
 }

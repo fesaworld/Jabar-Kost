@@ -94,8 +94,6 @@
 
         $('#roomTable').DataTable({
             order: [],
-            dom: 'Bfrtip',
-            buttons: ['excel', 'pdf'],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 ['10', '25', '50', '100', 'Semua']

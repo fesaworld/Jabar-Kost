@@ -1,16 +1,17 @@
 <script>
-    let log;
+    let log_id;
 
-    $(function () {
+    $(function() {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             }
-        })
+        });
+
         $('#logTable').DataTable({
-            dom: 'Bfrtip',
-            buttons: ['excel', 'pdf', 'print'],
             order: [],
+            dom: 'Bfrtip',
+            buttons: ['excel', 'pdf'],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 ['10', '25', '50', '100', 'Semua']
@@ -20,7 +21,7 @@
             responsive: true,
             serverSide: true,
             ajax: {
-                url: '/log'
+                url: '/invoice/lihatInvoice'
             },
             "columns": [{
                     data: 'DT_RowIndex',
@@ -50,8 +51,16 @@
                 {
                     data: 'price',
                     name: 'member.price'
+                },
+                {
+                    data: 'trf_image',
+                    name: 'member.stok'
+                },
+                {
+                    data: 'status',
+                    name: 'member.detail'
                 }
             ]
         });
-    })
+    });
 </script>
