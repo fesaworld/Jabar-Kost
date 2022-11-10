@@ -4,6 +4,7 @@
     const createRoom = () => {
         $('#createRoomForm').trigger('reset');
         $('#createRoomModal').modal('show');
+        $(".dropify-clear").click();
     }
 
     const importRoom = () => {
@@ -79,6 +80,7 @@
                 $('#roomPriceEdit').val(response.price);
                 $('#roomStockEdit').val(response.stok);
                 $('#roomDetailEdit').val(response.detail);
+                $(".dropify-clear").click();
                 Swal.close();
                 $('#editRoomModal').modal('show');
             }
@@ -94,8 +96,6 @@
 
         $('#roomTable').DataTable({
             order: [],
-            dom: 'Bfrtip',
-            buttons: ['excel', 'pdf'],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
                 ['10', '25', '50', '100', 'Semua']
@@ -107,32 +107,14 @@
             ajax: {
                 url: '/room/lihatRoom'
             },
-            "columns": [{
-                    data: 'DT_RowIndex',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'name',
-                    name: 'member.name'
-                },
-                {
-                    data: 'price',
-                    name: 'member.price'
-                },
-                {
-                    data: 'stok',
-                    name: 'member.stok'
-                },
-                {
-                    data: 'detail',
-                    name: 'member.detail'
-                },
-                {
-                    data: 'action',
-                    orderable: false,
-                    searchable: false
-                },
+            "columns": [
+                {data: 'DT_RowIndex', orderable: false, searchable: false},
+                {data: 'name', name: 'member.name'},
+                {data: 'price', name: 'member.price'},
+                {data: 'stok', name: 'member.stok'},
+                {data: 'detail', name: 'member.detail'},
+                {data: 'image', name: 'member.image'},
+                {data: 'action', orderable: false, searchable: false},
             ]
         });
 
@@ -149,7 +131,7 @@
         $('#createRoomSubmit').click(function(e) {
             e.preventDefault();
 
-            var formData = $('#createRoomForm').serialize();
+            var formData = new FormData($('#createRoomForm')[0]);
 
             $('#createRoomModal').modal('hide');
 
@@ -169,6 +151,7 @@
                 dataType: "json",
                 cache: false,
                 processData: false,
+                contentType: false,
                 success: function(data) {
                     Swal.close();
 
@@ -198,7 +181,7 @@
         $('#editRoomSubmit').click(function(e) {
             e.preventDefault();
 
-            var formData = $('#editRoomForm').serialize();
+            var formData = new FormData($('#editRoomForm')[0]);
 
             $('#editRoomModal').modal('hide');
 
@@ -218,6 +201,7 @@
                 dataType: "json",
                 cache: false,
                 processData: false,
+                contentType: false,
                 success: function(data) {
                     Swal.close();
 
@@ -240,6 +224,56 @@
 
                             $('#editRoomModal').modal('show');
                         })
+                    }
+                }
+            })
+        });
+
+        $('#printRoom').click(function(e) {
+            e.preventDefault();
+
+            var formData = new FormData($('#importForm')[0]);
+
+            $('#importRoom').modal('hide');
+
+            Swal.fire({
+                title: 'Mohon tunggu',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                willOpen: () => {
+                    Swal.showLoading()
+                }
+            });
+
+            $.ajax({
+                type: "post",
+                url: "/roomImport",
+                data: formData,
+                dataType: "json",
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    Swal.close();
+
+                    if (data.status) {
+                        Swal.fire(
+                            'Success!',
+                            data.msg,
+                            'success'
+                        )
+
+                        $('#roomTable').DataTable().ajax.reload();
+                    } else {
+                        Swal.fire(
+                            'Error!',
+                            data.msg,
+                            'warning'
+                        ).then(() => {
+
+                            $('#importRoom').modal('show');
+                        })
+
                     }
                 }
             })

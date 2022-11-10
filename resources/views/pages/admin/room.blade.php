@@ -3,6 +3,7 @@
 @section('content')
     @push('style')
         @include('components.styles.datatables')
+        @include('components.styles.dropify')
     @endpush
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -31,6 +32,7 @@
                             <th>Harga</th>
                             <th>Ketersediaan</th>
                             <th>Detail</th>
+                            <th>Foto</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -51,6 +53,7 @@
     @push('script')
         @include('components.scripts.datatables')
         @include('components.scripts.sweetalert')
+        @include('components.scripts.dropify')
         @include($script)
     @endpush
 @endsection

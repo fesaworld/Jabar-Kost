@@ -39,6 +39,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col mb-3">
+                            <label for="roomImageEdit" class="form-label">Foto Kamar</label>
+                            <input type="file" id="roomImageEdit" name="roomImageEdit" class="form-control" 
+                                required data-allowed-file-extensions="jpg png"
+                                data-max-file-size-preview="3M"
+                                data-max-file-size="3M">
+                            <div data-lastpass-icon-root="true"
+                                style="position: relative !important; height: 0px !important; width: 0px !important; float: left !important;">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>

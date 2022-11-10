@@ -20,6 +20,7 @@ class CreateRoomsTable extends Migration
             $table->decimal('price',14,5);
             $table->integer('stok');
             $table->text('detail');
+            $table->text('image')->nullable();
             $table->softdeletes();
         });
     }

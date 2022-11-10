@@ -5,17 +5,16 @@
                     <h5 class="modal-title" id="exampleModalLabel1">Import Kamar</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{url('/roomImport')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form id="importForm">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="import">Import data</label>
-                            <input type="file" name="import" id="import" class="form-control">
+                            <input type="file" name="importData" id="importData" class="form-control">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Create Room</button>
+                        <button type="button" class="btn btn-primary" id="printRoom">Create Room</button>
                     </div>
                 </form>
             </div>
