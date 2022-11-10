@@ -246,7 +246,6 @@ class RoomController extends Controller
         $data = $request -> file('import');
         Excel::import(new RoomImport,$data,null,\Maatwebsite\Excel\Excel::XLS);
         
-        
         return redirect()->back();
     }
 }
