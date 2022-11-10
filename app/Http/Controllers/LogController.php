@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Room;
 use App\User;
 use App\Invoice;
+use App\Exports\LogExport;
 use App\Imports\LogImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,12 +35,11 @@ class LogController extends Controller
             'script' => 'components.scripts.admin.log'
         ];
 
-        return view('pages.admin.invoice', $data);
+        return view('pages.admin.log', $data);
     }
 
-    public function import(Request $request){
-        $data = $request -> file('import');
-        Excel::import(new LogImport,$data);
-        return redirect()->back();
+    public function export() 
+    {
+        return Excel::download(new LogExport, 'users.xlsx');
     }
 }

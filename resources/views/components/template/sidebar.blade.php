@@ -43,6 +43,13 @@
             </a>
         </li>
 
+        
+        <li class="menu-item">
+            <a href="{{ url('/log') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-crown"></i>
+                <div data-i18n="Boxicons">Riwayat Pembayaran</div>
+            </a>
+        </li>
         <!-- Kelola Kost -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Kelola Kost</span></li>
         <!-- Cards -->

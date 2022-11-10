@@ -243,33 +243,10 @@ class RoomController extends Controller
     }
 
     public function import(Request $request){
-        try{
-
-            if(count($request->file()) > 0)
-            {
-                $data = $request -> file('importData');
-                Excel::import(new RoomImport,$data);
-                //return redirect()->back();
-    
-                $json = [
-                    'msg' => 'Import kamar berhasil',
-                    'status' => true
-                ];
-            }else{
-                $json = [
-                    'msg' => 'Import kamar Gagal',
-                    'status' => false,
-                ];
-            }
-        } catch(Exception $e) {
-            $json = [
-                'msg'       => 'error',
-                'status'    => false,
-                'e'         => $e,
-                'line'      => $e->getLine(),
-                'message'   => $e->getMessage(),
-            ];
-        }
-        return Response::json($json);
+        $data = $request -> file('import');
+        Excel::import(new RoomImport,$data,null,\Maatwebsite\Excel\Excel::XLS);
+        
+        
+        return redirect()->back();
     }
 }

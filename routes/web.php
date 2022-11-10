@@ -16,6 +16,7 @@ Route::group([
     require_once('includes/admin/room.php');
     require_once('includes/admin/invoice.php');
     require_once('includes/admin/verification.php');
+    require_once ('includes/admin/log.php');
 
     require_once('includes/user/userBill.php');
     require_once('includes/user/userProfile.php');
