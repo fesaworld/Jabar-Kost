@@ -16,6 +16,7 @@ class UserOrderController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
+        $status = Auth::user()->detail->status;
         $inv = Invoice::with('toUser', 'toRoom')->where('user_id', $id)->where('status', '<>', 'Selesai')->first();
         if($inv == null){
             $room = Room::where('stok', '<>', '0')->get();
@@ -23,11 +24,13 @@ class UserOrderController extends Controller
             $data = [
                 'room'   => $room,
                 'inv'    => $inv,
+                'status' => $status,
                 'script' => 'components.scripts.user.userOrder'
             ];
         }else{
             $data = [
                 'inv'    => $inv,
+                'status'    => $status,
                 'script' => 'components.scripts.user.userOrder'
             ];
         }
