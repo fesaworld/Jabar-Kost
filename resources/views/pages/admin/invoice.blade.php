@@ -3,7 +3,6 @@
 @section('content')
     @push('style')
         @include('components.styles.datatables')
-        @include('components.styles.select2')
     @endpush
     <!-- Content -->
     <div class="container-xxl flex-grow-1 container-p-y">
@@ -52,7 +51,6 @@
     @push('script')
         @include('components.scripts.datatables')
         @include('components.scripts.sweetalert')
-        @include('components.scripts.select2')
         @include($script)
     @endpush
 @endsection

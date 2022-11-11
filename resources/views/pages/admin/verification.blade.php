@@ -44,7 +44,6 @@
     @push('script')
         @include('components.scripts.datatables')
         @include('components.scripts.sweetalert')
-        @include('components.scripts.select2')
         @include($script)
     @endpush
 @endsection

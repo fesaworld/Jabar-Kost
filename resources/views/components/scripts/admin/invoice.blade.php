@@ -122,7 +122,7 @@
 
         $('#invTable').DataTable({
             order: [],
-            dom: 'Bfrtip',
+            dom: '<"class mb-3"B>lfrtip',
             buttons: ['excel', 'pdf'],
             lengthMenu: [
                 [10, 25, 50, 100, -1],
